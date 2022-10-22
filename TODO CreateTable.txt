@@ -1,0 +1,22 @@
+TODO CreateTable
+
+1- crear nodo Tablas plural     (DONE)
+2- crear nodo tabla singular    (DONE)
+3- crear nodo columnas plural   (DONE)  
+
+
+TODO addColum
+
+addCol(Personas, CI, integer, PRIMARY_KEY)
+// pre: tiene que existir una tabla.
+// pre: no puede haber otra columna con el mismo nombre.
+// pre: no puede haber 2 primary key
+flujo: bd.c --> columnas --> columna_singular
+
+bd.c --> bd
+1-  
+2-
+3-
+
+
+cambiamos la definicion de addcol en el archivo bd.h y bd.c. 
