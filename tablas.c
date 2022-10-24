@@ -1,45 +1,7 @@
-// #include "tablas.h"
-// #include "tabla.h"
-// #include <stdio.h>
-// #include <iostream>
-
-// using namespace std;
-
-// struct nodo_tablas{
-// 	tabla t;
-// };
-
-// tablas crearTablas(){
-// 	return NULL;
-// }
-
-// TipoRet crearTabla_Tablas(tablas & ts, char * nombreTabla){
-// 	if (ts == NULL){
-// 		ts = new(nodo_tablas);
-// 		ts->t = crearTabla(nombreTabla);
-// 		return OK;
-// 	}else{
-// 		cout << "Imposible Crear Tabla, ya hay una creada y el sistema soporta solo una\n";
-// 		return ERROR;
-// 	}
-// }
-
-// void imprimirTablas(tablas ts){
-// 	if (ts == NULL){
-// 		cout << " - No hay tablas\n";
-// 	}else{
-// 		cout << nombreTabla(ts->t);
-// 	}
-// }
-
-// tabla getT(tablas ts){
-// 	return ts->t;
-// }
-
 #include "tablas.h"
 #include <stdio.h>
 #include <iostream>
-// #include <stdbool.h> // para bool
+#include <stdbool.h> // para bool
 
 
 using namespace std;
@@ -88,27 +50,65 @@ char * getColumnaSingularNombre_Tablas(tablas & ts){
 	return getColumnaSingularNombre_Tabla(ts->t);
 }
 
-// tabla crearColumSingular_Tablas(char *NombreCol, char *tipoCol, char *calificadorCol){
-// 	return crearColumSingular_Tabla(NombreCol, tipoCol, calificadorCol);
-// }
+char * getColumnaSingularTipoDato_Tablas(tablas ts){
+	return getColumnaSingularTipoDato_Tabla(ts->t);
+}
+
+char * getColumnaSingularCalificador_Tablas(tablas ts){
+	return getColumnaSingularCalificador_Tabla(ts->t);
+}
+
 
 void crearColumSingular_Tablas(tablas & ts, char *NombreCol, char *tipoCol, char *calificadorCol){
 	crearColumSingular_Tabla(ts->t, NombreCol, tipoCol, calificadorCol);
 }
 
+tablas & getColumnaSig_Tablas(tablas & ts){
+	ts->t = getColumnaSig_Tabla(ts->t);
+	return ts;
+}
+
+bool compararNombreColumnaSingular_Tablas(tablas ts, char * nombreC){
+	return compararNombreColumnaSingular_Tabla(ts->t, nombreC);
+}
+
+
+
 
 TipoRet crearColumSingular_Columnas(tablas & ts, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol){
 	if (isTablasEmpty_Tablas(ts)){
+		cout << "Imposible Crear Columna. No existe tabla\n";
 		return ERROR;
 	}else{
+
+		cout << "toy en else\n";
+
 		if(isColumnasEmpty_Tablas(ts)){
-			crearColumnas_Tablas(ts);
+			crearColumnas_Tablas(ts); // Creamos un new(nodo_tablas)
 			crearColumSingular_Tablas(ts, nombreTabla, tipoCol, calificadorCol);
-			cout << "NO IMPLEMENTADA";
-			return ERROR;
-		}else{
-			crearColumSingular_Tablas(ts, nombreTabla, tipoCol, calificadorCol);
+
+			cout << getColumnaSingularNombre_Tablas(ts);
 			return OK;
+		}else{
+			bool aux = true;
+			do{
+				if(compararNombreColumnaSingular_Tablas(ts, nombreTabla)){
+					cout << "Imposible Crear Columna. Ya existe una columna con el nombre\n";
+					aux = false;
+					return ERROR;
+				}else{
+					if(!isColumnasEmpty_Tablas(getColumnaSig_Tablas(ts))){
+						//si col siguiente no es null, seguimos comparando
+						cout << "hay mas de una columna";
+						ts = getColumnaSig_Tablas(ts);
+					}else{
+						//si el siguiente es null, ya se compararon todas las colums y no hay repetido.
+						crearColumSingular_Tablas(ts, nombreTabla, tipoCol, calificadorCol);
+						aux = false;
+						return OK;
+					}
+				}
+			}while(aux);
 		}
 	}
 }
@@ -116,32 +116,6 @@ TipoRet crearColumSingular_Columnas(tablas & ts, char *nombreTabla, char *Nombre
 
 
 
-// TipoRet crearColumSingular_Columnas(tablas & ts, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol){
-// 	if (ts == NULL){
-// 	// verificamos que exista una tabla creada
-// 		cout << "Imposible crear columna, no existe la tabla\n";
-// 		return ERROR;
-// 	}else{
-// 	// verificamos si ya existe una columna con el mismo nombre
-// 			// columnaSingular col = ts->t->colums->columna_singular;
-// 			// columnaSingular col = getT(ts)->colums->columna_singular;
-
-// 			cout << "el valor " << getColumnaSingularNombre_Tablas(ts);
-// 			// cout << "el valor " << getColumnas(getT(ts));
-// 			// cout << ts->t;
-// 		// do{
-// 		// 	if (nombreTabla == ts->t->colums->columna_singular->nombre){
-// 		// 		cout << "Imposible crear columna. Ya existe columna con el nombre" << NombreCol << "\n";
-// 		// 		return ERROR;
-// 		// 	}else{
-// 		// 		ts->t->colums->columna_singular = ts->t->colums->columna_singular->sig;
-// 		// 	} 
-
-
-// 		// }while(ts->t->colums->columna_singular->sig != NULL);
-// 		return OK;
-// 	}
-// }
 
 
 

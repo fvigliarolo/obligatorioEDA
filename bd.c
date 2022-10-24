@@ -39,7 +39,7 @@ TipoRet dropTable (bd & bd, char *nombreTabla){
 }
 
 TipoRet addCol (bd & bd, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol){
-	cout << " - addCol " << nombreTabla << " " << NombreCol << " " << tipoCol << " " << calificadorCol << endl;;
+	// cout << " - addCol " << nombreTabla << " " << NombreCol << " " << tipoCol << " " << calificadorCol << endl;;
 	// return NO_IMPLEMENTADA;
 	return crearColumSingular_Columnas(bd->ts, nombreTabla, NombreCol, tipoCol, calificadorCol);
 

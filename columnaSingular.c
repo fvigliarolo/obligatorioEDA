@@ -1,8 +1,8 @@
 #include "columnaSingular.h"
-#include "define.h"
-#include "atributo_simple.h"
 #include <string.h>
 #include <iostream>
+#include <stdbool.h> // para bool
+
 
 
 using namespace std;
@@ -15,41 +15,35 @@ struct nodo_columnaSingular{
 	columnaSingular sig;	
 };
 
-// columnaSingular crearColumSingular(char *NombreCol, char *tipoCol, char *calificadorCol){
-
-// 	cout << "nombre" << NombreCol << endl;
-// 	cout << "tipocol" << tipoCol << endl;
-// 	cout << "calificadorCol" << calificadorCol << endl;
-// 	nodo_columnaSingular *columna_singular = new(nodo_columnaSingular);
-// 	// 	asigna nombre
-// 	columna_singular->nombre = new char[MAX_NOMBRE];
-// 	strcpy(columna_singular->nombre, NombreCol);
-// 	// asigna tipo
-// 	columna_singular->tipo_dato = new char[MAX_NOMBRE];
-// 	strcpy(columna_singular->tipo_dato, tipoCol);
-// 	//
-// 	columna_singular->calificador = calificadorCol;
-
-
-// 	return columna_singular;
-// }
-
-// columnaSingular columnaSingularNull(){
-// 	return NULL;
-// }
-
-
 columnaSingular columnaSingularNull(){
-	return new(nodo_columnaSingular);
+	return new(nodo_columnaSingular); //aca no tendri que ser return null?
+
+}
+// osea arriba creamos el nodo (el cual no sabemos si esta vacio) y luego lo dejamos null 
+
+columnaSingular columnaSingularNULL(){
+	return NULL;	
+}
+
+char * getColumnaSingularNombre(columnaSingular columna_singular){
+	return columna_singular->nombre;
+
+}
+
+char * getColumnaSingularTipoDato(columnaSingular cs){
+	return cs->tipo_dato;
+}
+
+char * getColumnaSingularCalificador(columnaSingular cs){
+	return cs->calificador;
+}
+
+columnaSingular & getColumnaSig_ColumnaSingular(columnaSingular &columna_singular){
+	return columna_singular->sig;
 }
 
 
 void crearColumSingular(columnaSingular cs, char *NombreCol, char *tipoCol, char *calificadorCol){
-
-	// cout << cs;
-	// cout << NombreCol;
-	// cout << tipoCol;
-	// cout << calificadorCol;
 
 	// 	asigna nombre
 	cs->nombre = new char[MAX_NOMBRE];
@@ -60,16 +54,16 @@ void crearColumSingular(columnaSingular cs, char *NombreCol, char *tipoCol, char
 	strcpy(cs->tipo_dato, tipoCol);
 	//
 	cs->calificador = calificadorCol;
-
-	cout << "nombre: " << cs->nombre << "\n";
-	cout << "tipo: " << cs->tipo_dato << "\n";
-	cout << "calificador: " << cs->calificador << "\n";
 }
 
 
-char * getColumnaSingularNombre(columnaSingular columna_singular){
-	columnaSingular cs = new(nodo_columnaSingular);
-	cs->nombre = "tablita";
-	return cs->nombre;
+bool compararNombreColumnaSingular(columnaSingular cs, char * nombreC){
+	if (strcasecmp(nombreC, cs->nombre) == 0){
+		return true;
+	}else{
+		return false;
+	}
 }
+
+
 
