@@ -63,7 +63,7 @@ void crearColumSingular_Tablas(tablas & ts, char *NombreCol, char *tipoCol, char
 	crearColumSingular_Tabla(ts->t, NombreCol, tipoCol, calificadorCol);
 }
 
-tablas & getColumnaSig_Tablas(tablas & ts){
+tablas & getColumnaSig_Tablas(tablas ts){
 	ts->t = getColumnaSig_Tabla(ts->t);
 	return ts;
 }
@@ -81,26 +81,29 @@ TipoRet crearColumSingular_Columnas(tablas & ts, char *nombreTabla, char *Nombre
 		return ERROR;
 	}else{
 
-		cout << "toy en else\n";
+
 
 		if(isColumnasEmpty_Tablas(ts)){
 			crearColumnas_Tablas(ts); // Creamos un new(nodo_tablas)
-			crearColumSingular_Tablas(ts, nombreTabla, tipoCol, calificadorCol);
+			crearColumSingular_Tablas(ts, NombreCol, tipoCol, calificadorCol);
 
-			cout << getColumnaSingularNombre_Tablas(ts);
+			// cout << getColumnaSingularNombre_Tablas(ts);
 			return OK;
 		}else{
 			bool aux = true;
 			do{
-				if(compararNombreColumnaSingular_Tablas(ts, nombreTabla)){
+				if(compararNombreColumnaSingular_Tablas(ts, NombreCol)){
 					cout << "Imposible Crear Columna. Ya existe una columna con el nombre\n";
 					aux = false;
 					return ERROR;
 				}else{
 					if(!isColumnasEmpty_Tablas(getColumnaSig_Tablas(ts))){
+					// if(true){
+
 						//si col siguiente no es null, seguimos comparando
 						cout << "hay mas de una columna";
-						ts = getColumnaSig_Tablas(ts);
+						// ts = getColumnaSig_Tablas(ts);
+						aux = false;
 					}else{
 						//si el siguiente es null, ya se compararon todas las colums y no hay repetido.
 						crearColumSingular_Tablas(ts, nombreTabla, tipoCol, calificadorCol);

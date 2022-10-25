@@ -35,7 +35,7 @@ char * getColumnaSingularTipoDato_Tablas(tablas ts);
 
 char * getColumnaSingularCalificador_Tablas(tablas ts);
 
-tablas & getColumnaSig_Tablas(tablas & ts);
+tablas & getColumnaSig_Tablas(tablas ts);
 
 bool compararNombreColumnaSingular_Tablas(tablas ts, char * nombreC);
 

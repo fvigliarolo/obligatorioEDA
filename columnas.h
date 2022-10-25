@@ -19,7 +19,7 @@ columnas crearColumnasNULL();
 
 char * getColumnaSingularNombre_Columnas(columnas col);
 
-columnas & getColumnaSig_Columnas(columnas &col);
+columnas getColumnaSig_Columnas(columnas col);
 
 void crearColumSingular_Columnas(columnas col, char *NombreCol, char *tipoCol, char *calificadorCol);
 

@@ -49,7 +49,7 @@ char * getColumnaSingularCalificador_Tabla(tabla t){
 	return getColumnaSingularCalificador_Columnas(t->colums);
 }
 
-tabla & getColumnaSig_Tabla(tabla &t){
+tabla getColumnaSig_Tabla(tabla t){
     t->colums = getColumnaSig_Columnas(t->colums);
 	return t;
 }

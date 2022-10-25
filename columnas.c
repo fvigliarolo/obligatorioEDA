@@ -31,7 +31,7 @@ char * getColumnaSingularCalificador_Columnas(columnas col){
 	return getColumnaSingularCalificador(col->columna_singular);
 }
 
-columnas & getColumnaSig_Columnas(columnas &col){
+columnas getColumnaSig_Columnas(columnas col){
 	col->columna_singular = getColumnaSig_ColumnaSingular(col->columna_singular);
 	return col;
 }

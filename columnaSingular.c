@@ -25,7 +25,7 @@ columnaSingular columnaSingularNULL(){
 	return NULL;	
 }
 
-char * getColumnaSingularNombre(columnaSingular columna_singular){
+char * getColumnaSingularNombre(columnaSingular &columna_singular){
 	return columna_singular->nombre;
 
 }
@@ -38,7 +38,7 @@ char * getColumnaSingularCalificador(columnaSingular cs){
 	return cs->calificador;
 }
 
-columnaSingular & getColumnaSig_ColumnaSingular(columnaSingular &columna_singular){
+columnaSingular getColumnaSig_ColumnaSingular(columnaSingular columna_singular){
 	return columna_singular->sig;
 }
 

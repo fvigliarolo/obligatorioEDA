@@ -8,7 +8,7 @@ typedef struct nodo_columnaSingular * columnaSingular;
 
 void crearColumSingular(columnaSingular cs, char *NombreCol, char *tipoCol, char *calificadorCol);
 
-char * getColumnaSingularNombre(columnaSingular & columna_singular);
+char * getColumnaSingularNombre(columnaSingular &columna_singular);
 
 columnaSingular columnaSingularNull();
 
@@ -18,7 +18,7 @@ char * getColumnaSingularCalificador(columnaSingular cs);
 
 bool compararNombreColumnaSingular(columnaSingular cs, char * nombreC);
 
-columnaSingular &getColumnaSig_ColumnaSingular(columnaSingular columna_singular);
+columnaSingular getColumnaSig_ColumnaSingular(columnaSingular columna_singular);
 
 
 
