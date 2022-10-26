@@ -20,6 +20,6 @@ bool compararNombreColumnaSingular(columnaSingular cs, char * nombreC);
 
 columnaSingular getColumnaSig_ColumnaSingular(columnaSingular columna_singular);
 
-
+bool isColumnasSingularEmpty_ColumnasSingular(columnaSingular cs);
 
 #endif

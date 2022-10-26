@@ -13,6 +13,7 @@ struct nodo_columnaSingular{
 	char * calificador;
 	atributo_simple atr_simple;
 	columnaSingular sig;	
+	columnaSingular anterior;	
 };
 
 columnaSingular columnaSingularNull(){
@@ -42,7 +43,6 @@ columnaSingular getColumnaSig_ColumnaSingular(columnaSingular columna_singular){
 	return columna_singular->sig;
 }
 
-
 void crearColumSingular(columnaSingular cs, char *NombreCol, char *tipoCol, char *calificadorCol){
 
 	// 	asigna nombre
@@ -54,6 +54,11 @@ void crearColumSingular(columnaSingular cs, char *NombreCol, char *tipoCol, char
 	strcpy(cs->tipo_dato, tipoCol);
 	//
 	cs->calificador = calificadorCol;
+
+	// cs->sig = columnaSingularNull();
+	cs->sig = columnaSingularNULL();
+
+	// cs->sig->anterior = cs;
 }
 
 
@@ -64,6 +69,11 @@ bool compararNombreColumnaSingular(columnaSingular cs, char * nombreC){
 		return false;
 	}
 }
+
+bool isColumnasSingularEmpty_ColumnasSingular(columnaSingular cs){
+	return (cs == NULL);
+}
+
 
 
 

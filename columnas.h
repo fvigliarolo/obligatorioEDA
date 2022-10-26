@@ -32,6 +32,8 @@ bool isColumnasEmpty_Columnas(columnas col);
 
 bool compararNombreColumnaSingular_Columnas(columnas col, char * nombreC);
 
+bool isColumnasSingularEmpty_Columnas(columnas col);
+
 
 
 #endif

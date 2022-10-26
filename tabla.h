@@ -35,5 +35,8 @@ tabla getColumnaSig_Tabla(tabla t);
 
 bool compararNombreColumnaSingular_Tabla(tabla t, char * nombreC);
 
+bool isColumnasSingularEmpty_Tabla(tabla t);
+
+TipoRet dropTable_Tabla(tabla & PEPE, char *nombreTabla);
 
 #endif

@@ -12,7 +12,7 @@ tablas crearTablas();
 TipoRet crearTabla_Tablas(tablas & ts, char * nombreTabla);
 // Crea la tabla de nombre "nombreTabla" en tablas.
 
-void imprimirTablas(tablas ts);
+char * imprimirTablas(tablas ts);
 // Imprime las tablas de manera ordenada.
 
 TipoRet crearColumSingular_Columnas(tablas & ts, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol);
@@ -35,9 +35,20 @@ char * getColumnaSingularTipoDato_Tablas(tablas ts);
 
 char * getColumnaSingularCalificador_Tablas(tablas ts);
 
-tablas & getColumnaSig_Tablas(tablas ts);
+tablas getColumnaSig_Tablas(tablas ts);
 
 bool compararNombreColumnaSingular_Tablas(tablas ts, char * nombreC);
+
+bool isColumnasSingularEmpty_Tablas(tablas ts);
+
+// TipoRet InsertInto_Tablas(tablas & ts, char *nombreTabla, char *columnasTupla, char *valoresTupla);
+
+TipoRet eliminarTabla_Tablas(tablas & ts, char *nombreTabla);
+
+TipoRet dropTable_Tablas(tablas & TS, char *nombreTabla);
+
+
+
 
 
 

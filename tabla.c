@@ -51,6 +51,7 @@ char * getColumnaSingularCalificador_Tabla(tabla t){
 
 tabla getColumnaSig_Tabla(tabla t){
     t->colums = getColumnaSig_Columnas(t->colums);
+	// cout << "estoy volviendo del llamado getColumnaSig_Columnas \n";
 	return t;
 }
 
@@ -61,3 +62,12 @@ void crearColumSingular_Tabla(tabla t, char *NombreCol, char *tipoCol, char *cal
 bool compararNombreColumnaSingular_Tabla(tabla t, char * nombreC){
 	return compararNombreColumnaSingular_Columnas(t->colums, nombreC);
 }
+
+bool isColumnasSingularEmpty_Tabla(tabla t){
+	return isColumnasSingularEmpty_Columnas(t->colums);
+}
+ TipoRet dropTable_Tabla(tabla & PEPE, char *nombreTabla){
+		delete PEPE;
+		cout << PEPE;
+		return OK;
+ }

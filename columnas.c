@@ -32,7 +32,9 @@ char * getColumnaSingularCalificador_Columnas(columnas col){
 }
 
 columnas getColumnaSig_Columnas(columnas col){
+	// cout << "columna previa: " << col->columna_singular << "\n" << endl; 
 	col->columna_singular = getColumnaSig_ColumnaSingular(col->columna_singular);
+	cout << "columna: " << col->columna_singular << "\n" << endl; 
 	return col;
 }
 
@@ -49,4 +51,9 @@ void crearColumSingular_Columnas(columnas col, char *NombreCol, char *tipoCol, c
 bool compararNombreColumnaSingular_Columnas(columnas col, char * nombreC){
 	return compararNombreColumnaSingular(col->columna_singular, nombreC);
 }
+
+bool isColumnasSingularEmpty_Columnas(columnas col){
+	return isColumnasSingularEmpty_ColumnasSingular(col->columna_singular);
+}
+
 

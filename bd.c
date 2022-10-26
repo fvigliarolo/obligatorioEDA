@@ -33,9 +33,10 @@ TipoRet createTable (bd & bd, char *nombreTabla){
 	return crearTabla_Tablas(bd->ts, nombreTabla);
 }
 
-TipoRet dropTable (bd & bd, char *nombreTabla){
+TipoRet dropTable(bd & bd, char *nombreTabla){
 	//cout << " - dropTable " << nombreTabla << endl;;
-	return NO_IMPLEMENTADA;
+	return eliminarTabla_Tablas(bd->ts, nombreTabla);
+	// return NO_IMPLEMENTADA;
 }
 
 TipoRet addCol (bd & bd, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol){
@@ -57,6 +58,7 @@ TipoRet alterCol (bd & bd, char * nombreTabla, char * nombreCol, char *tipoColNu
 
 TipoRet insertInto (bd & bd, char *nombreTabla, char *columnasTupla, char *valoresTupla){
 	//cout << " - insertInto " << nombreTabla << " " << columnasTupla << " " << valoresTupla<< endl;;
+	// return InsertInto_Tablas(bd->ts, nombreTabla, columnasTupla, valoresTupla);
 	return NO_IMPLEMENTADA;
 }
 

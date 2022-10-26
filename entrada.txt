@@ -1,4 +1,5 @@
 createTable(Personas)
+dropTable(Personas)
 createTable(CI)
 addCol(Personas, CI, integer, PRIMARY_KEY)
 addCol(Personas, Apellido, string, NOT_EMPTY)

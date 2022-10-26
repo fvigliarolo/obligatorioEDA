@@ -14,12 +14,12 @@ tablas crearTablas(){
 	return NULL;
 }
 
-void imprimirTablas(tablas ts){
-	if (ts == NULL){
-		cout << " - No hay tablas\n";
-	}else{
-		cout << nombreTabla(ts->t);
-	}
+char * imprimirTablas(tablas ts){
+	// if (ts == NULL){
+		// cout << " - No hay tablas\n";
+	// }else{
+		return nombreTabla(ts->t);
+	// }
 }
 
 bool isTablasEmpty_Tablas(tablas & ts){
@@ -63,8 +63,10 @@ void crearColumSingular_Tablas(tablas & ts, char *NombreCol, char *tipoCol, char
 	crearColumSingular_Tabla(ts->t, NombreCol, tipoCol, calificadorCol);
 }
 
-tablas & getColumnaSig_Tablas(tablas ts){
+tablas getColumnaSig_Tablas(tablas ts){
+	// cout << "ts: " << ts << "\n";
 	ts->t = getColumnaSig_Tabla(ts->t);
+	// cout << "ts: " << ts << "\n";
 	return ts;
 }
 
@@ -72,7 +74,9 @@ bool compararNombreColumnaSingular_Tablas(tablas ts, char * nombreC){
 	return compararNombreColumnaSingular_Tabla(ts->t, nombreC);
 }
 
-
+bool isColumnasSingularEmpty_Tablas(tablas ts){
+	return isColumnasSingularEmpty_Tabla(ts->t);
+}
 
 
 TipoRet crearColumSingular_Columnas(tablas & ts, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol){
@@ -81,13 +85,10 @@ TipoRet crearColumSingular_Columnas(tablas & ts, char *nombreTabla, char *Nombre
 		return ERROR;
 	}else{
 
-
-
 		if(isColumnasEmpty_Tablas(ts)){
 			crearColumnas_Tablas(ts); // Creamos un new(nodo_tablas)
 			crearColumSingular_Tablas(ts, NombreCol, tipoCol, calificadorCol);
 
-			// cout << getColumnaSingularNombre_Tablas(ts);
 			return OK;
 		}else{
 			bool aux = true;
@@ -97,13 +98,11 @@ TipoRet crearColumSingular_Columnas(tablas & ts, char *nombreTabla, char *Nombre
 					aux = false;
 					return ERROR;
 				}else{
-					if(!isColumnasEmpty_Tablas(getColumnaSig_Tablas(ts))){
-					// if(true){
-
+					if(isColumnasSingularEmpty_Tablas(getColumnaSig_Tablas(ts))){
 						//si col siguiente no es null, seguimos comparando
-						cout << "hay mas de una columna";
-						// ts = getColumnaSig_Tablas(ts);
-						aux = false;
+						ts = getColumnaSig_Tablas(ts);
+						// cout << getColumnaSig_Tablas(ts);
+						
 					}else{
 						//si el siguiente es null, ya se compararon todas las colums y no hay repetido.
 						crearColumSingular_Tablas(ts, nombreTabla, tipoCol, calificadorCol);
@@ -118,7 +117,83 @@ TipoRet crearColumSingular_Columnas(tablas & ts, char *nombreTabla, char *Nombre
 
 
 
+// TipoRet InsertInto_Tablas(tablas & ts, char *nombreTabla, char *columnasTupla, char *valoresTupla){
+// 	// falta verificar PRIMARY KEY, NOT_EMPTY 
+
+// 	if (isTablasEmpty_Tablas(ts)){
+// 		cout << "No se puede insertar. No se ha encontrado la tabla\n";
+// 		return ERROR;
+// 	}else if(imprimirTablas(ts) != nombreTabla){
+// 		cout << "No se puede insertar. No se ha encontrado la tabla\n";
+// 		return ERROR;
+// 	}else{
+// 		bool errores = false;
+// 		bool aux = true;
+		
+// 		char * param1, * param2;
+// 		param1 = strtok (columnasTupla, ":");
+
+// 		while(param1 != NULL){
+
+// 			do{
+// 				if(getColumnaSingularNombre_Tabla(ts) == param1 ){
+// 					// existe la columna singular == param1. 
+// 					aux = false;
+// 				}else{
+// 					if(){
+// 						//siguiente es null. No existe la columna sigular
+// 						errores = true;
+// 						aux = false;
+// 					}else{
+// 						// si el siguiente es distinto de null, movemos a la siguiente columna_singular
+
+// 					}
+// 				}
+				
+// 			}while(aux);
+			
+// 			param1 = strtok (NULL, ":");
+// 			// obtenemos el siguiente parametro.
+// 		}
+
+// 		if (errores){
+// 			cout << "verifique las columnas";
+// 			return ERROR;
+// 		}else{
+// 			//insertar bajo la columna_singular correspondiente
+// 			param1 = strtok (columnasTupla, ":");
+// 			while (parm1 != NULL){
+// 				insertar_tabla(parm1);
+// 				param1 = strtok (NULL, ":");
+
+// 			}
+// 			return OK;
+// 		}
+
+// 	}
+// }
 
 
+TipoRet dropTable_Tablas(tablas & TS, char *nombreTabla){
+ 	return dropTable_Tabla(TS->t, nombreTabla);
+}
 
 
+ TipoRet eliminarTabla_Tablas(tablas & TS, char *nombreTabla){
+	
+ 	// if(isTablasEmpty_Tablas(TS)){
+ 	// 	//si la tabla esta vacia
+	// 	cout <<"no se puede eliminar. no existe esta tabla   \n";
+ 	// 	return ERROR;
+ 	// }else{
+ 	// 	cout << "se eliminara la tabla: " << imprimirTablas(TS);
+ 	// 	delete TS ;
+ 	// 	cout << "se elimino la tabla.";
+	// 	cout << TS ;
+		
+ 	// }
+// si llega aca se elimino, voy a poner un comentario solo para futuro debug
+	
+ 	return dropTable_Tablas(TS,nombreTabla);
+
+ }
