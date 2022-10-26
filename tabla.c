@@ -68,6 +68,7 @@ bool isColumnasSingularEmpty_Tabla(tabla t){
 }
  TipoRet dropTable_Tabla(tabla & PEPE, char *nombreTabla){
 		delete PEPE;
-		cout << PEPE;
+	 	//TENGO QUE APUNTAR PEPE A NULL
+	 	PEPE = NULL; //TENGO QUE APUNTARLO A NULL 
 		return OK;
  }
