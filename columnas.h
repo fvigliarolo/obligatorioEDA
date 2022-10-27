@@ -34,6 +34,9 @@ bool compararNombreColumnaSingular_Columnas(columnas col, char * nombreC);
 
 bool isColumnasSingularEmpty_Columnas(columnas col);
 
+TipoRet crearColumnaSingular_Columnas(columnas col, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol);
+
+
 
 
 #endif

@@ -39,4 +39,7 @@ bool isColumnasSingularEmpty_Tabla(tabla t);
 
 TipoRet dropTable_Tabla(tabla & PEPE, char *nombreTabla);
 
+ TipoRet crearColumnaSingular_Tabla(tabla t, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol);
+ 
+
 #endif
