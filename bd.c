@@ -35,8 +35,7 @@ TipoRet createTable (bd & bd, char *nombreTabla){
 
 TipoRet dropTable(bd & bd, char *nombreTabla){
 	//cout << " - dropTable " << nombreTabla << endl;;
-	return eliminarTabla_Tablas(bd->ts, nombreTabla);
-	// return NO_IMPLEMENTADA;
+	 return NO_IMPLEMENTADA;
 }
 
 TipoRet addCol (bd & bd, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol){
@@ -115,7 +114,7 @@ TipoRet printTables(bd bd){
 
 TipoRet printMetadata(bd bd, char *nombreTabla){
 	//cout << " - printMetadata " << nombreTabla << endl;
-	return NO_IMPLEMENTADA;
+	return estructuraTablas_tablas(bd->ts, nombreTabla);
 }
 
 TipoRet undo(bd & bd){

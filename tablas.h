@@ -27,7 +27,7 @@ bool isTablasEmpty_Tablas(tablas & ts);
 
 bool isColumnasEmpty_Tablas(tablas & ts);
 
-void crearColumSingular_Tablas(tablas & ts, char *NombreCol, char *tipoCol, char *calificadorCol);
+// void crearColumSingular_Tablas(tablas & ts, char *NombreCol, char *tipoCol, char *calificadorCol);
 
 tablas crearColumnas_Tablas(tablas & ts);
 
@@ -45,11 +45,6 @@ bool isColumnasSingularEmpty_Tablas(tablas ts);
 
 TipoRet eliminarTabla_Tablas(tablas & ts, char *nombreTabla);
 
-TipoRet dropTable_Tablas(tablas & TS, char *nombreTabla);
-
-
-
-
-
+TipoRet estructuraTablas_tablas(tablas ts, char *nombreTabla);
 
 #endif

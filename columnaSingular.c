@@ -26,6 +26,10 @@ columnaSingular columnaSingularNULL(){
 	return NULL;	
 }
 
+columnaSingular columnaSingularAnterior(columnaSingular cs){
+	return cs->anterior;
+}
+
 char * getColumnaSingularNombre(columnaSingular &columna_singular){
 	return columna_singular->nombre;
 
@@ -43,22 +47,56 @@ columnaSingular getColumnaSig_ColumnaSingular(columnaSingular columna_singular){
 	return columna_singular->sig;
 }
 
-void crearColumSingular(columnaSingular cs, char *NombreCol, char *tipoCol, char *calificadorCol){
+bool isColumnaSingularEmpty(columnaSingular cs){
+	return (cs == NULL);
+}
 
-	// 	asigna nombre
-	cs->nombre = new char[MAX_NOMBRE];
-	strcpy(cs->nombre, NombreCol);
+void crearColumSingular(columnaSingular cs, char *NombreCol, char *tipoCol, char *calificadorCol, bool primerCol){
+	
+	columnaSingular auxSig 				= NULL;
+	// columnaSingular auxSig 				= columnaSingularNULL();
 
-	// asigna tipo
-	cs->tipo_dato = new char[MAX_NOMBRE];
-	strcpy(cs->tipo_dato, tipoCol);
-	//
-	cs->calificador = calificadorCol;
+	if (primerCol){
+		columnaSingular auxAnterior 	= columnaSingularNULL();
+	 	cs->anterior 					= auxAnterior;
+		cs->sig 						= auxSig;
+		cs->nombre 						= new char[MAX_NOMBRE];
+		cs->tipo_dato 					= new char[MAX_NOMBRE];
+		cs->calificador 				= new char[MAX_NOMBRE];
+		// cs->calificador 				= calificadorCol;
+		strcpy(cs->nombre, NombreCol);
+		strcpy(cs->tipo_dato, tipoCol);
+		strcpy(cs->calificador, calificadorCol);
 
-	// cs->sig = columnaSingularNull();
-	cs->sig = columnaSingularNULL();
+	}else{
+			columnaSingular auxUltimaCS  			= columnaSingularNull();
+			auxUltimaCS->nombre 					= new char[MAX_NOMBRE];
+			auxUltimaCS->tipo_dato 					= new char[MAX_NOMBRE];
+			auxUltimaCS->calificador 				= new char[MAX_NOMBRE];
+			// auxUltimaCS->calificador 				= calificadorCol;
+			strcpy(auxUltimaCS->nombre, NombreCol);
+			strcpy(auxUltimaCS->tipo_dato, tipoCol);
+			strcpy(auxUltimaCS->calificador, calificadorCol);
+			
+		bool aux = true;
+		while (aux){
+			if (isColumnaSingularEmpty(cs->sig)){
+				cs->sig = auxUltimaCS;
+				auxUltimaCS->anterior = cs;
+				auxUltimaCS->sig = auxSig;
+				aux = false;
+			}else{
+				cs = cs->sig;
+			}
+		}
+		// cout << "Columna: " << auxUltimaCS->nombre 	<< endl ;
+		// cout << "Tipo: " << auxUltimaCS->tipo_dato  	<< endl ;
+		// cout << "Calificador: " << auxUltimaCS->calificador 	<< endl ;
+		// cout << "Anterior: " << auxUltimaCS->anterior->nombre 	<< endl ;
+		// cout << "Siguiente: " << auxUltimaCS->sig 	<< endl ;
 
-	// cs->sig->anterior = cs;
+
+	}
 }
 
 
@@ -74,6 +112,114 @@ bool isColumnasSingularEmpty_ColumnasSingular(columnaSingular cs){
 	return (cs == NULL);
 }
 
+void imprimirColumnaSingular(columnaSingular cs){
+			cout << "Columna:	" << cs->nombre 	<< endl ;
+			cout << "Tipo:		" << cs->tipo_dato  	<< endl ;
+			cout << "Calificador:	" << cs->calificador 	<< endl ;
+}
+TipoRet crearColumnaSingular_ColumnasSingular(columnaSingular cs, char *NombreCol, char *tipoCol, char *calificadorCol, bool primerCol){
+
+
+		bool aux = true;
+		while(aux){
+			if (primerCol){
+				aux = false;
+				crearColumSingular(cs, NombreCol, tipoCol, calificadorCol, primerCol);
+				return OK;
+			}else{
+				if (isColumnaSingularEmpty(cs->sig)){
+					if(strcasecmp(NombreCol, cs->nombre) == 0){
+						aux = false;
+						cout << "Ya existe columna con el mismo nombre";
+						return ERROR;
+					}else{
+						aux = false;
+						crearColumSingular(cs, NombreCol, tipoCol, calificadorCol, primerCol);
+						return OK;
+					}
+				}else{
+					if(strcasecmp(NombreCol, cs->nombre) == 0){
+						aux = false;
+						cout << "Ya existe columna con el mismo nombre";
+						return ERROR;
+					}else{
+						cs = cs->sig;
+					}
+				}
+		}
+	}
+}
+
+
+TipoRet estructuraTablas_Columnasingular(columnaSingular cs, char *nombreTabla){
+
+		bool aux = true;
+		while(aux){
+		cout << "========================================" << endl ;
+		if (isColumnaSingularEmpty(cs->sig)){
+			aux = false;
+			imprimirColumnaSingular(cs);
+		}else{
+			imprimirColumnaSingular(cs);
+			cs = cs->sig;
+		}
+	}
+	cout << "========================================" << endl ;
+	return OK;
+}
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//  	// verificamos que no exista otra cs con mismo nombre
+	
+	// 		bool aux = true;
+	// 		do{
+	// 			if(compararNombreColumnaSingular_Tablas(ts, NombreCol)){
+	// 				cout << "Imposible Crear Columna. Ya existe una columna con el nombre\n";
+	// 				aux = false;
+	// 				return ERROR;
+	// 			}else{
+	// 				if(isColumnasSingularEmpty_Tablas(getColumnaSig_Tablas(ts))){
+	// 					//si col siguiente no es null, seguimos comparando
+	// 					ts = getColumnaSig_Tabl	as(ts);
+	// 					// cout << getColumnaSig_Tablas(ts);
+						
+	// 				}else{
+	// 					//si el siguiente es null, ya se compararon todas las colums y no hay repetido.
+	// 					crearColumSingular_Tablas(ts, nombreTabla, tipoCol, calificadorCol);
+	// 					aux = false;
+	// 					return OK;
+	// 				}
+	// 			}
+	// 		}while(aux);
+	// 	}
+
+		// return OK;

@@ -21,7 +21,7 @@ char * getColumnaSingularNombre_Columnas(columnas col);
 
 columnas getColumnaSig_Columnas(columnas col);
 
-void crearColumSingular_Columnas(columnas col, char *NombreCol, char *tipoCol, char *calificadorCol);
+void crearColumnaSingularVOID_Columnas(columnas col, char *NombreCol, char *tipoCol, char *calificadorCol, bool primerCol);
 
 
 char * getColumnaSingularTipoDato_Columnas(columnas col);
@@ -34,9 +34,9 @@ bool compararNombreColumnaSingular_Columnas(columnas col, char * nombreC);
 
 bool isColumnasSingularEmpty_Columnas(columnas col);
 
-TipoRet crearColumnaSingular_Columnas(columnas col, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol);
+TipoRet crearColumnaSingular_Columnas(columnas col, char *NombreCol, char *tipoCol, char *calificadorCol, bool primerCol);
 
-
+TipoRet estructuraTablas_Columnas(columnas t, char *nombreTabla);
 
 
 #endif

@@ -41,10 +41,8 @@ bool isColumnasEmpty_Columnas(columnas col){
 }
 
 
-void crearColumSingular_Columnas(columnas col, char *NombreCol, char *tipoCol, char *calificadorCol){
-	col->columna_singular = columnaSingularNull();
-	crearColumSingular(col->columna_singular, NombreCol, tipoCol, calificadorCol);
-}
+// void crearColumnaSingularVOID_Columnas(columnas col, char *NombreCol, char *tipoCol, char *calificadorCol, bool primerCol){
+// }
 
 bool compararNombreColumnaSingular_Columnas(columnas col, char * nombreC){
 	return compararNombreColumnaSingular(col->columna_singular, nombreC);
@@ -55,32 +53,17 @@ bool isColumnasSingularEmpty_Columnas(columnas col){
 }
 
 
-TipoRet crearColumnaSingular_Columnas(columnas col, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol){
-
-		if{
-			return crearColumnaSingular_ColumnasSingular(col->columna_singular, nombreTabla, NombreCol, tipoCol, calificadorCol);
-		}
-		// 	bool aux = true;
-		// 	do{
-		// 		if(compararNombreColumnaSingular_Tablas(ts, NombreCol)){
-		// 			cout << "Imposible Crear Columna. Ya existe una columna con el nombre\n";
-		// 			aux = false;
-		// 			return ERROR;
-		// 		}else{
-		// 			if(isColumnasSingularEmpty_Tablas(getColumnaSig_Tablas(ts))){
-		// 				//si col siguiente no es null, seguimos comparando
-		// 				ts = getColumnaSig_Tabl	as(ts);
-		// 				// cout << getColumnaSig_Tablas(ts);
-						
-		// 			}else{
-		// 				//si el siguiente es null, ya se compararon todas las colums y no hay repetido.
-		// 				crearColumSingular_Tablas(ts, nombreTabla, tipoCol, calificadorCol);
-		// 				aux = false;
-		// 				return OK;
-		// 			}
-		// 		}
-		// 	}while(aux);
-		// }
-
+TipoRet crearColumnaSingular_Columnas(columnas col, char *NombreCol, char *tipoCol, char *calificadorCol, bool primerCol){
+	if (col->columna_singular == NULL){
+		col->columna_singular = columnaSingularNull();
+		return crearColumnaSingular_ColumnasSingular(col->columna_singular, NombreCol, tipoCol, calificadorCol, primerCol);
+	}else{
+		return crearColumnaSingular_ColumnasSingular(col->columna_singular, NombreCol, tipoCol, calificadorCol, primerCol);
+	}
 }
+
+TipoRet estructuraTablas_Columnas(columnas col, char *nombreTabla){
+	return estructuraTablas_Columnasingular(col->columna_singular, nombreTabla);
+}
+
 

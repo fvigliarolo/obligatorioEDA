@@ -59,9 +59,9 @@ char * getColumnaSingularCalificador_Tablas(tablas ts){
 }
 
 
-void crearColumSingular_Tablas(tablas & ts, char *NombreCol, char *tipoCol, char *calificadorCol){
-	crearColumSingular_Tabla(ts->t, NombreCol, tipoCol, calificadorCol);
-}
+// void crearColumSingular_Tablas(tablas & ts, char *NombreCol, char *tipoCol, char *calificadorCol){
+// 	crearColumSingular_Tabla(ts->t, NombreCol, tipoCol, calificadorCol);
+// }
 
 tablas getColumnaSig_Tablas(tablas ts){
 	// cout << "ts: " << ts << "\n";
@@ -88,46 +88,9 @@ TipoRet crearColumSingular_Columnas(tablas & ts, char *nombreTabla, char *Nombre
 	}
 }	
 
-
-
-
-// TipoRet crearColumSingular_Columnas(tablas & ts, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol){
-// 	if (isTablasEmpty_Tablas(ts)){
-// 		cout << "Imposible Crear Columna. No existe tabla\n";
-// 		return ERROR;
-// 	}else{
-		
-// 		if(isColumnasEmpty_Tablas(ts)){
-// 			crearColumnas_Tablas(ts); // Creamos un new(nodo_tablas)
-// 			crearColumSingular_Tablas(ts, NombreCol, tipoCol, calificadorCol);
-
-// 			return OK;
-// 		}else{
-// 			bool aux = true;
-// 			do{
-// 				if(compararNombreColumnaSingular_Tablas(ts, NombreCol)){
-// 					cout << "Imposible Crear Columna. Ya existe una columna con el nombre\n";
-// 					aux = false;
-// 					return ERROR;
-// 				}else{
-// 					if(isColumnasSingularEmpty_Tablas(getColumnaSig_Tablas(ts))){
-// 						//si col siguiente no es null, seguimos comparando
-// 						ts = getColumnaSig_Tabl	as(ts);
-// 						// cout << getColumnaSig_Tablas(ts);
-						
-// 					}else{
-// 						//si el siguiente es null, ya se compararon todas las colums y no hay repetido.
-// 						crearColumSingular_Tablas(ts, nombreTabla, tipoCol, calificadorCol);
-// 						aux = false;
-// 						return OK;
-// 					}
-// 				}
-// 			}while(aux);
-// 		}
-// 	}
-// }
-
-
+TipoRet estructuraTablas_tablas(tablas ts, char *nombreTabla){
+	return estructuraTablas_tabla(ts->t, nombreTabla);
+}
 
 // TipoRet InsertInto_Tablas(tablas & ts, char *nombreTabla, char *columnasTupla, char *valoresTupla){
 // 	// falta verificar PRIMARY KEY, NOT_EMPTY 
@@ -186,26 +149,3 @@ TipoRet crearColumSingular_Columnas(tablas & ts, char *nombreTabla, char *Nombre
 // }
 
 
-// TipoRet dropTable_Tablas(tablas & TS, char *nombreTabla){
-//  	return dropTable_Tabla(TS->t, nombreTabla);
-// }
-
-
-//  TipoRet eliminarTabla_Tablas(tablas & TS, char *nombreTabla){
-	
-//  	// if(isTablasEmpty_Tablas(TS)){
-//  	// 	//si la tabla esta vacia
-// 	// 	cout <<"no se puede eliminar. no existe esta tabla   \n";
-//  	// 	return ERROR;
-//  	// }else{
-//  	// 	cout << "se eliminara la tabla: " << imprimirTablas(TS);
-//  	// 	delete TS ;
-//  	// 	cout << "se elimino la tabla.";
-// 	// 	cout << TS ;
-		
-//  	// }
-// // si llega aca se elimino, voy a poner un comentario solo para futuro debug
-	
-//  	return dropTable_Tablas(TS,nombreTabla);
-
-//  }

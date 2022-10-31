@@ -25,7 +25,7 @@ char * getColumnaSingularNombre_Tabla(tabla t);
 
 bool isColumnasEmpty_Tabla(tabla t);
 
-void crearColumSingular_Tabla(tabla t, char *NombreCol, char *tipoCol, char *calificadorCol);
+// void crearColumSingular_Tabla(tabla t, char *NombreCol, char *tipoCol, char *calificadorCol);
 
 char * getColumnaSingularTipoDato_Tabla(tabla t);
 
@@ -37,9 +37,9 @@ bool compararNombreColumnaSingular_Tabla(tabla t, char * nombreC);
 
 bool isColumnasSingularEmpty_Tabla(tabla t);
 
-TipoRet dropTable_Tabla(tabla & PEPE, char *nombreTabla);
+TipoRet crearColumnaSingular_Tabla(tabla t, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol);
 
- TipoRet crearColumnaSingular_Tabla(tabla t, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol);
+TipoRet estructuraTablas_tabla(tabla t, char *nombreTabla);
  
 
 #endif

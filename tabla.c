@@ -55,9 +55,9 @@ tabla getColumnaSig_Tabla(tabla t){
 	return t;
 }
 
-void crearColumSingular_Tabla(tabla t, char *NombreCol, char *tipoCol, char *calificadorCol){
-	crearColumSingular_Columnas(t->colums, NombreCol, tipoCol, calificadorCol);
-}
+// void crearColumSingular_Tabla(tabla t, char *NombreCol, char *tipoCol, char *calificadorCol){
+// 	crearColumSingular_Columnas(t->colums, NombreCol, tipoCol, calificadorCol);
+// }
 
 bool compararNombreColumnaSingular_Tabla(tabla t, char * nombreC){
 	return compararNombreColumnaSingular_Columnas(t->colums, nombreC);
@@ -66,54 +66,31 @@ bool compararNombreColumnaSingular_Tabla(tabla t, char * nombreC){
 bool isColumnasSingularEmpty_Tabla(tabla t){
 	return isColumnasSingularEmpty_Columnas(t->colums);
 }
- TipoRet dropTable_Tabla(tabla & PEPE, char *nombreTabla){
-		delete PEPE;
-	 	//TENGO QUE APUNTAR PEPE A NULL
-	 	PEPE = NULL; //TENGO QUE APUNTARLO A NULL 
-		return OK;
- }
+
 
  TipoRet crearColumnaSingular_Tabla(tabla t, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol){
-
-	if (nombreTabla != t->nombre){
+	if (strcasecmp (nombreTabla, t->nombre) != 0){
 		cout << "No existe la tabla " << nombreTabla << "\n";
 		return ERROR;
 	}else{
+		bool primerCol;
 		if(isColumnasEmpty_Columnas(t->colums)){
-			crearColumnas_Tabla(t); // Creamos un new(nodo_tablas)
-			crearColumSingular_Columnas(t->colums, NombreCol, tipoCol, calificadorCol);
+			primerCol = true;
+			t->colums = crearColumnas(); // Creamos un new(nodo_columnas)
+			crearColumnaSingular_Columnas(t->colums, NombreCol, tipoCol, calificadorCol, primerCol);
 			return OK;
 		}else{
-		return crearColumnaSingular_Columnas(t->colums, nombreTabla, NombreCol, tipoCol, calificadorCol);
+			primerCol = false;
+			return crearColumnaSingular_Columnas(t->colums, NombreCol, tipoCol, calificadorCol, primerCol);
+		}		
 	}
-
-		// if(isColumnasEmpty_Tabla(ts)){
-		// 	crearColumnas_Tablas(ts); // Creamos un new(nodo_tablas)
-		// 	crearColumSingular_Tablas(ts, NombreCol, tipoCol, calificadorCol);
-
-		// 	return OK;
-		// }else{
-		// 	bool aux = true;
-		// 	do{
-		// 		if(compararNombreColumnaSingular_Tablas(ts, NombreCol)){
-		// 			cout << "Imposible Crear Columna. Ya existe una columna con el nombre\n";
-		// 			aux = false;
-		// 			return ERROR;
-		// 		}else{
-		// 			if(isColumnasSingularEmpty_Tablas(getColumnaSig_Tablas(ts))){
-		// 				//si col siguiente no es null, seguimos comparando
-		// 				ts = getColumnaSig_Tabl	as(ts);
-		// 				// cout << getColumnaSig_Tablas(ts);
-						
-		// 			}else{
-		// 				//si el siguiente es null, ya se compararon todas las colums y no hay repetido.
-		// 				crearColumSingular_Tablas(ts, nombreTabla, tipoCol, calificadorCol);
-		// 				aux = false;
-		// 				return OK;
-		// 			}
-		// 		}
-		// 	}while(aux);
-		// }
-
  }
 
+TipoRet estructuraTablas_tabla(tabla t, char *nombreTabla){
+	if (strcasecmp (nombreTabla, t->nombre) == 0){
+		return estructuraTablas_Columnas(t->colums, nombreTabla);
+	}else{
+		cout << "La tabla no existe" << endl ;
+		return ERROR;
+	}
+}
