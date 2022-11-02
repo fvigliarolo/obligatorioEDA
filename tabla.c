@@ -20,6 +20,20 @@ tabla crearTabla(char * nombreTabla){
 	t->colums = crearColumnasNULL();
 	return t;
 }
+TipoRet EliminarTabla_tablas(tablas & ts, char * nombreTabla){
+	cout << "llegue a la linea 49 de tablas c";
+	if (isTablasEmpty_Tablas(ts)){
+		cout <<"no hay tabla que eliminar \n";
+		return 	ERROR;		
+	}
+	 else{
+		ts->t = eliminarTabla(ts->t, nombreTabla);
+		ts = crearTablas();//ERA ESTO EL ERROR DIOS MIO
+
+		return OK;
+	 }
+}
+
 
 tabla crearColumnas_Tabla(tabla & t){
 	t->colums = crearColumnas(); 
