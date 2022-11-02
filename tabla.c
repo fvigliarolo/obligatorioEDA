@@ -20,19 +20,24 @@ tabla crearTabla(char * nombreTabla){
 	t->colums = crearColumnasNULL();
 	return t;
 }
-TipoRet EliminarTabla_tablas(tablas & ts, char * nombreTabla){
-	cout << "llegue a la linea 49 de tablas c";
-	if (isTablasEmpty_Tablas(ts)){
-		cout <<"no hay tabla que eliminar \n";
-		return 	ERROR;		
-	}
-	 else{
-		ts->t = eliminarTabla(ts->t, nombreTabla);
-		ts = crearTablas();//ERA ESTO EL ERROR DIOS MIO
 
-		return OK;
-	 }
+tabla eliminarTabla(tabla & t, char * nombreTabla){
+	int aux = strcasecmp(t->nombre,nombreTabla);
+		cout << "hola llegue a tabla c linea 28";
+		if(aux == 0){
+			tabla elim = t;
+			t = NULL;
+			
+			delete elim;
+			
+		}
+		else{
+			cout << "la tabla " << t << " no fue borrada" << endl;
+			return t;
+		}
+	return t;
 }
+
 
 
 tabla crearColumnas_Tabla(tabla & t){
