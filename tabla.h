@@ -9,9 +9,12 @@ typedef struct nodo_tabla * tabla;
 tabla crearTabla(char * nombreTabla);
 // Crea una tabla de nombre "nombreTabla".
 
-tabla eliminarTabla(char * nombreTabla);
+TipoRet EliminarTabla_tablas(tablas & ts, char *nombreTabla);
+ //Elimina la tabla "nombre tabla" 
 //elimina la tabla y sus tuplas
 //pre: la tabla a eliminar existe
+
+bool compararNombreTabla_tablas(tablas ts, char * nombreTabla); //Deberia funcionar bien, pues me compila
 
 tabla crearColumnas_Tabla(tabla & t);
 
