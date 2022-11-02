@@ -43,6 +43,19 @@ TipoRet crearTabla_Tablas(tablas & ts, char * nombreTabla){
 	}
 }
 
+TipoRet EliminarTabla_tablas(tablas & ts, char * nombreTabla){
+	cout << "llegue a la linea 49 de tablas c";
+	if (isTablasEmpty_Tablas(ts)){
+		cout <<"no hay tabla que eliminar \n";
+		return 	ERROR;		
+	}
+	 else{
+		ts->t = eliminarTabla(ts->t, nombreTabla);
+		ts = crearTablas();
+
+		return OK;
+	 }
+}
 
 // AddColumn()
 TipoRet crearColumSingular_Columnas(tablas & ts, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol){
