@@ -9,6 +9,8 @@ using namespace std;
 struct nodo_tabla{
 	char * nombre;
 	columnas colums;
+	tabla iz;
+	tabla der;
 };
 
 tabla crearTabla(char * nombreTabla){
@@ -24,7 +26,6 @@ tabla crearColumnas_Tabla(tabla & t){
 	return t;
 }
 
-
 char * nombreTabla(tabla t){
 	return t->nombre;
 }
@@ -33,41 +34,7 @@ columnas getColumnas(tabla t){
 	return t->colums;
 }
 
-bool isColumnasEmpty_Tabla(tabla t){
-	return isColumnasEmpty_Columnas(t->colums);
-}
-
-char * getColumnaSingularNombre_Tabla(tabla t){
-	return getColumnaSingularNombre_Columnas(t->colums);
-}
-
-char * getColumnaSingularTipoDato_Tabla(tabla t){
-	return getColumnaSingularTipoDato_Columnas(t->colums);
-}
-
-char * getColumnaSingularCalificador_Tabla(tabla t){
-	return getColumnaSingularCalificador_Columnas(t->colums);
-}
-
-tabla getColumnaSig_Tabla(tabla t){
-    t->colums = getColumnaSig_Columnas(t->colums);
-	// cout << "estoy volviendo del llamado getColumnaSig_Columnas \n";
-	return t;
-}
-
-// void crearColumSingular_Tabla(tabla t, char *NombreCol, char *tipoCol, char *calificadorCol){
-// 	crearColumSingular_Columnas(t->colums, NombreCol, tipoCol, calificadorCol);
-// }
-
-bool compararNombreColumnaSingular_Tabla(tabla t, char * nombreC){
-	return compararNombreColumnaSingular_Columnas(t->colums, nombreC);
-}
-
-bool isColumnasSingularEmpty_Tabla(tabla t){
-	return isColumnasSingularEmpty_Columnas(t->colums);
-}
-
-
+//addColumn
  TipoRet crearColumnaSingular_Tabla(tabla t, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol){
 	if (strcasecmp (nombreTabla, t->nombre) != 0){
 		cout << "No existe la tabla " << nombreTabla << "\n";
@@ -86,6 +53,7 @@ bool isColumnasSingularEmpty_Tabla(tabla t){
 	}
  }
 
+// PrintMetaData()
 TipoRet estructuraTablas_tabla(tabla t, char *nombreTabla){
 	if (strcasecmp (nombreTabla, t->nombre) == 0){
 		return estructuraTablas_Columnas(t->colums, nombreTabla);
@@ -94,3 +62,14 @@ TipoRet estructuraTablas_tabla(tabla t, char *nombreTabla){
 		return ERROR;
 	}
 }
+
+
+TipoRet InsertInto_Tabla(tabla & t, char *nombreTabla, char *columnasTupla, char *valoresTupla){
+// buscar si existe la tabla
+	return InsertInto_Columnas(t->colums, nombreTabla, columnasTupla, valoresTupla);
+//else
+
+}
+
+
+

@@ -6,14 +6,16 @@
 
 typedef struct nodo_tablas * tablas;
 
+bool isTablasEmpty_Tablas(tablas & ts);
+// Devuelve true si ts es NULL.
+
+char * imprimirTablas(tablas ts);
+
 tablas crearTablas();
 // Crea el conjunto de tablas vacio.
 
 TipoRet crearTabla_Tablas(tablas & ts, char * nombreTabla);
 // Crea la tabla de nombre "nombreTabla" en tablas.
-
-char * imprimirTablas(tablas ts);
-// Imprime las tablas de manera ordenada.
 
 TipoRet crearColumSingular_Columnas(tablas & ts, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol);
 // crea una columna dentro de una tabla.
@@ -21,30 +23,16 @@ TipoRet crearColumSingular_Columnas(tablas & ts, char *nombreTabla, char *Nombre
 // pre: no puede haber otra columna con el mismo nombre.
 // pre: no puede haber 2 primary key
 
-char * getColumnaSingularNombre_Tablas(tablas & ts);
-
-bool isTablasEmpty_Tablas(tablas & ts);
-
-bool isColumnasEmpty_Tablas(tablas & ts);
-
-// void crearColumSingular_Tablas(tablas & ts, char *NombreCol, char *tipoCol, char *calificadorCol);
-
 tablas crearColumnas_Tablas(tablas & ts);
+// Agrega una columna nueva a la tabla.
 
-char * getColumnaSingularTipoDato_Tablas(tablas ts);
+TipoRet InsertInto_Tablas(tablas & ts, char *nombreTabla, char *columnasTupla, char *valoresTupla);
+// Intenta realizar una insercion de datos en la tabla indicada por el usuario.
 
-char * getColumnaSingularCalificador_Tablas(tablas ts);
-
-tablas getColumnaSig_Tablas(tablas ts);
-
-bool compararNombreColumnaSingular_Tablas(tablas ts, char * nombreC);
-
-bool isColumnasSingularEmpty_Tablas(tablas ts);
-
-// TipoRet InsertInto_Tablas(tablas & ts, char *nombreTabla, char *columnasTupla, char *valoresTupla);
+TipoRet estructuraTablas_tablas(tablas ts, char *nombreTabla);
+// Devuelve la estructura de las columnas de la tabla.
 
 TipoRet eliminarTabla_Tablas(tablas & ts, char *nombreTabla);
 
-TipoRet estructuraTablas_tablas(tablas ts, char *nombreTabla);
 
 #endif

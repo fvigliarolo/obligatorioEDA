@@ -20,26 +20,19 @@ char * nombreTabla(tabla t);
 // Pre: t creada previamente.
 
 columnas getColumnas(tabla t);
-
-char * getColumnaSingularNombre_Tabla(tabla t);
-
-bool isColumnasEmpty_Tabla(tabla t);
-
-// void crearColumSingular_Tabla(tabla t, char *NombreCol, char *tipoCol, char *calificadorCol);
-
-char * getColumnaSingularTipoDato_Tabla(tabla t);
-
-char * getColumnaSingularCalificador_Tabla(tabla t);
-
-tabla getColumnaSig_Tabla(tabla t);
-
-bool compararNombreColumnaSingular_Tabla(tabla t, char * nombreC);
-
-bool isColumnasSingularEmpty_Tabla(tabla t);
+// Retorna la estructura columnas de la tabla.
 
 TipoRet crearColumnaSingular_Tabla(tabla t, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol);
+// crea una columna dentro de una tabla.
+// pre: tiene que existir una tabla.
+// pre: no puede haber otra columna con el mismo nombre.
+// pre: no puede haber 2 primary key
 
 TipoRet estructuraTablas_tabla(tabla t, char *nombreTabla);
- 
+// Devuelve la estructura de las columnas de la tabla.
+
+TipoRet InsertInto_Tabla(tabla & t, char *nombreTabla, char *columnasTupla, char *valoresTupla);
+// Intenta realizar una insercion de datos en la tabla indicada por el usuario.
+
 
 #endif

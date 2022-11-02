@@ -7,36 +7,25 @@
 
 typedef struct nodo_columnas * columnas;
 
-// TipoRet crearColumSingular_Columnas(tablas & ts, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol);
-// crea una columna dentro de una tabla.
-// pre: tiene que existir una tabla.
-// pre: no puede haber otra columna con el mismo nombre.
-// pre: no puede haber 2 primary key
 
 columnas crearColumnas();
 
 columnas crearColumnasNULL();
 
-char * getColumnaSingularNombre_Columnas(columnas col);
-
-columnas getColumnaSig_Columnas(columnas col);
-
 void crearColumnaSingularVOID_Columnas(columnas col, char *NombreCol, char *tipoCol, char *calificadorCol, bool primerCol);
-
-
-char * getColumnaSingularTipoDato_Columnas(columnas col);
-
-char * getColumnaSingularCalificador_Columnas(columnas col);
 
 bool isColumnasEmpty_Columnas(columnas col);
 
-bool compararNombreColumnaSingular_Columnas(columnas col, char * nombreC);
-
-bool isColumnasSingularEmpty_Columnas(columnas col);
-
 TipoRet crearColumnaSingular_Columnas(columnas col, char *NombreCol, char *tipoCol, char *calificadorCol, bool primerCol);
+// Agrega una columna nueva a la tabla.
 
 TipoRet estructuraTablas_Columnas(columnas t, char *nombreTabla);
+// Devuelve la estructura de las columnas de la tabla.
+
+TipoRet InsertInto_Columnas(columnas & col, char *nombreTabla, char *columnasTupla, char *valoresTupla);
+// Intenta realizar una insercion de datos en la tabla indicada por el usuario.
+
+bool existeColumnaSingular(columnaSingular cs, char * NombreCol);
 
 
 #endif

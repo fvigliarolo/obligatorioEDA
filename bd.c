@@ -57,8 +57,8 @@ TipoRet alterCol (bd & bd, char * nombreTabla, char * nombreCol, char *tipoColNu
 
 TipoRet insertInto (bd & bd, char *nombreTabla, char *columnasTupla, char *valoresTupla){
 	//cout << " - insertInto " << nombreTabla << " " << columnasTupla << " " << valoresTupla<< endl;;
-	// return InsertInto_Tablas(bd->ts, nombreTabla, columnasTupla, valoresTupla);
-	return NO_IMPLEMENTADA;
+	return InsertInto_Tablas(bd->ts, nombreTabla, columnasTupla, valoresTupla);
+	// return NO_IMPLEMENTADA;
 }
 
 TipoRet deleteFrom (bd & bd, char *nombreTabla, char *condicionEliminar){

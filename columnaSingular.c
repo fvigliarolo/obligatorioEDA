@@ -20,37 +20,33 @@ columnaSingular columnaSingularNull(){
 	return new(nodo_columnaSingular); //aca no tendri que ser return null?
 
 }
-// osea arriba creamos el nodo (el cual no sabemos si esta vacio) y luego lo dejamos null 
 
 columnaSingular columnaSingularNULL(){
 	return NULL;	
-}
-
-columnaSingular columnaSingularAnterior(columnaSingular cs){
-	return cs->anterior;
-}
-
-char * getColumnaSingularNombre(columnaSingular &columna_singular){
-	return columna_singular->nombre;
-
-}
-
-char * getColumnaSingularTipoDato(columnaSingular cs){
-	return cs->tipo_dato;
-}
-
-char * getColumnaSingularCalificador(columnaSingular cs){
-	return cs->calificador;
-}
-
-columnaSingular getColumnaSig_ColumnaSingular(columnaSingular columna_singular){
-	return columna_singular->sig;
 }
 
 bool isColumnaSingularEmpty(columnaSingular cs){
 	return (cs == NULL);
 }
 
+
+bool compararNombreColumnaSingular(columnaSingular cs, char * nombreC){
+	if (strcasecmp(nombreC, cs->nombre) == 0){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+
+void imprimirColumnaSingular(columnaSingular cs){
+			cout << "Columna:	" << cs->nombre 	<< endl ;
+			cout << "Tipo:		" << cs->tipo_dato  	<< endl ;
+			cout << "Calificador:	" << cs->calificador 	<< endl ;
+}
+
+
+// AddColumn()
 void crearColumSingular(columnaSingular cs, char *NombreCol, char *tipoCol, char *calificadorCol, bool primerCol){
 	
 	columnaSingular auxSig 				= NULL;
@@ -98,25 +94,6 @@ void crearColumSingular(columnaSingular cs, char *NombreCol, char *tipoCol, char
 
 	}
 }
-
-
-bool compararNombreColumnaSingular(columnaSingular cs, char * nombreC){
-	if (strcasecmp(nombreC, cs->nombre) == 0){
-		return true;
-	}else{
-		return false;
-	}
-}
-
-bool isColumnasSingularEmpty_ColumnasSingular(columnaSingular cs){
-	return (cs == NULL);
-}
-
-void imprimirColumnaSingular(columnaSingular cs){
-			cout << "Columna:	" << cs->nombre 	<< endl ;
-			cout << "Tipo:		" << cs->tipo_dato  	<< endl ;
-			cout << "Calificador:	" << cs->calificador 	<< endl ;
-}
 TipoRet crearColumnaSingular_ColumnasSingular(columnaSingular cs, char *NombreCol, char *tipoCol, char *calificadorCol, bool primerCol){
 
 
@@ -150,7 +127,7 @@ TipoRet crearColumnaSingular_ColumnasSingular(columnaSingular cs, char *NombreCo
 	}
 }
 
-
+// PrintMetaData()
 TipoRet estructuraTablas_Columnasingular(columnaSingular cs, char *nombreTabla){
 
 		bool aux = true;
@@ -168,7 +145,27 @@ TipoRet estructuraTablas_Columnasingular(columnaSingular cs, char *nombreTabla){
 	return OK;
 }
 
+bool existeColumnaSingular(columnaSingular cs, char *NombreCol){
+	bool aux = true;
 
+	while (aux){
+		if (cs->sig == NULL){
+			aux = false;
+			if(strcasecmp (cs->nombre, NombreCol) == 0){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			if(strcasecmp (cs->nombre, NombreCol) == 0){
+				aux = false;
+				return true;
+			}else{
+				cs = cs->sig;
+			}
+		}
+	}
+}
 
 
 
