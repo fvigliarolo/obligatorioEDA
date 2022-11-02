@@ -35,7 +35,7 @@ TipoRet createTable (bd & bd, char *nombreTabla){
 
 TipoRet dropTable(bd & bd, char *nombreTabla){
 	//cout << " - dropTable " << nombreTabla << endl;;
-	 return crearTabla_Tablas(bd->ts, nombreTabla);
+	 return EliminarTabla_tablas(bd->ts, nombreTabla);
 }
 
 TipoRet addCol (bd & bd, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol){
