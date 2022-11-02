@@ -37,7 +37,13 @@ tabla eliminarTabla(tabla & t, char * nombreTabla){
 		}
 	return t;
 }
-
+bool compararNombreTabla(tabla t, char * nombreTabla){
+	if (strcasecmp(nombreTabla, t->nombre) == 0){
+		return true;
+	}else{
+		return false;
+	}
+}
 
 
 tabla crearColumnas_Tabla(tabla & t){
