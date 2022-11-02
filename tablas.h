@@ -17,6 +17,9 @@ tablas crearTablas();
 TipoRet crearTabla_Tablas(tablas & ts, char * nombreTabla);
 // Crea la tabla de nombre "nombreTabla" en tablas.
 
+TipoRet EliminarTabla_tablas(tablas & ts, char *nombreTabla);
+// llama a la funcion eliminartabla 
+
 TipoRet crearColumSingular_Columnas(tablas & ts, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol);
 // crea una columna dentro de una tabla.
 // pre: tiene que existir una tabla.
