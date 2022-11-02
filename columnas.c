@@ -38,55 +38,55 @@ TipoRet estructuraTablas_Columnas(columnas col, char *nombreTabla){
 
 TipoRet InsertInto_Columnas(columnas & col, char *nombreTabla, char *columnasTupla, char *valoresTupla){
 
-		bool aux1 = true;
-		
-		char * param1, * param2;
-		int errores = 0;
-		param1 = strtok (columnasTupla, ":");
+	char * param1;
+	char * param2;
 
-		while(param1 != NULL){
+	char * param1Copia = new char[1000];
+	strcpy(param1Copia, columnasTupla);
 
-			if (existeColumnaSingular(col->columna_singular, param1)){
-				cout << "Existe el atributo: " << param1 << endl ;
-			}else{
-				cout << "No existe el atributo: " << param1 << endl ;
-			}
-			param1 = strtok (NULL, ":");
+	char * param2Copia = new char[1000];
+	strcpy(param2Copia, valoresTupla);
 
-		// 	do{
-		// 		if(getColumnaSingularNombre_Tabla(ts) == param1 ){
-		// 			// existe la columna singular == param1. 
-		// 			aux = false;
-		// 		}else{insertInto(Personas, CI:Apellido:Nombre:teta 3333333:Gonzalez:Maria)
+	int lenghtParm1 = 0;
+	int lenghtParm2 = 0;
+	int errores = 0;
 
-		// 				// si el siguiente es distinto de null, movemos a la siguiente columna_singular
-
-		// 			}
-
+	param1 = strtok(columnasTupla, ":");
+	while(param1 != NULL){
+	// cuento el largo del futuro array, y de paso verifica si existen las columnas
+		if (!existeColumnaSingular(col->columna_singular, param1)){
+			errores += 1;
+			cout << "No existe el atributo: " << param1 << endl ;
 		}
-			// if (errores == 0){
-			// 	InsertInto_ColumnasSingular()
-			// }
-		// 	}while(aux);
-			
-		// 	param1 = strtok (NULL, ":");
-		// 	// obtenemos el siguiente parametro.
-		// }
+		lenghtParm1 += 1;
+		param1 = strtok(NULL, ":");
 
-		// // if (errores){
-		// // 	cout << "verifique las columnas";
-		// // 	return ERROR;
-		// // }else{
-		// // 	//insertar bajo la columna_singular correspondiente
-		// // 	param1 = strtok (columnasTupla, ":");
-		// // 	while (parm1 != NULL){
-		// // 		insertar_tabla(parm1);
-		// // 		param1 = strtok (NULL, ":");
+	}
+	param2 = strtok(valoresTupla, ":");
+	while(param2 != NULL){
+	// cuenta el largo del futuro array
+		lenghtParm2 += 1;
+		param2 = strtok(NULL, ":");
 
-		// 	}
+	}
+
+	if (errores != 0){
+		return ERROR;
+	}else{
+		if(lenghtParm1 == lenghtParm2){
 			return OK;
+		}else{
+			return ERROR;
 		}
+	}
 
-// 	}
-// }
+
+	// 		param1 = strtok(param1Copia, ":");
+	// 		char * arrayColumnasTupla[lenght];
+	// 		int i = 0;
+	// 		arrayColumnasTupla[i] = param1;
+	// 		for(i=1 ;i<lenght;i++){
+	// 			param1 = strtok(NULL, ":");
+	// 			arrayColumnasTupla[i] = param1;
+}
 
