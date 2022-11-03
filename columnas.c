@@ -36,7 +36,7 @@ TipoRet estructuraTablas_Columnas(columnas col, char *nombreTabla){
 	return estructuraTablas_Columnasingular(col->columna_singular, nombreTabla);
 }
 
-TipoRet InsertInto_Columnas(columnas & col, char *nombreTabla, char *columnasTupla, char *valoresTupla){
+TipoRet InsertInto_Columnas(columnas & col, char *columnasTupla, char *valoresTupla){
 
 	char * param1;
 	char * param2;
@@ -74,19 +74,11 @@ TipoRet InsertInto_Columnas(columnas & col, char *nombreTabla, char *columnasTup
 		return ERROR;
 	}else{
 		if(lenghtParm1 == lenghtParm2){
-			return OK;
+			return InsertInto_ColumnasSingular(col->columna_singular, param1Copia, param2Copia, lenghtParm1, lenghtParm2);
 		}else{
 			return ERROR;
 		}
 	}
 
-
-	// 		param1 = strtok(param1Copia, ":");
-	// 		char * arrayColumnasTupla[lenght];
-	// 		int i = 0;
-	// 		arrayColumnasTupla[i] = param1;
-	// 		for(i=1 ;i<lenght;i++){
-	// 			param1 = strtok(NULL, ":");
-	// 			arrayColumnasTupla[i] = param1;
 }
 

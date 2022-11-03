@@ -21,22 +21,19 @@ tabla crearTabla(char * nombreTabla){
 	return t;
 }
 
-tabla eliminarTabla(tabla & t, char * nombreTabla){
-	int aux = strcasecmp(t->nombre,nombreTabla);
-		cout << "hola llegue a tabla c linea 28";
-		if(aux == 0){
-			tabla elim = t;
-			t = NULL;
-			
-			delete elim;
-			
-		}
-		else{
-			cout << "la tabla " << t << " no fue borrada" << endl;
-			return t;
-		}
+tabla crearColumnas_Tabla(tabla & t){
+	t->colums = crearColumnas(); 
 	return t;
 }
+
+char * nombreTabla(tabla t){
+	return t->nombre;
+}
+
+columnas getColumnas(tabla t){
+	return t->colums;
+}
+
 bool compararNombreTabla(tabla t, char * nombreTabla){
 	if (strcasecmp(nombreTabla, t->nombre) == 0){
 		return true;
@@ -59,6 +56,21 @@ columnas getColumnas(tabla t){
 	return t->colums;
 }
 
+tabla eliminarTabla(tabla & t, char * nombreTabla){
+	int aux = strcasecmp(t->nombre,nombreTabla);
+		if(aux == 0){
+			tabla elim = t;
+			t = NULL;
+			
+			delete elim;
+			
+		}
+		else{
+			cout << "la tabla " << t << " no fue borrada" << endl;
+			return t;
+		}
+	return t;
+}
 //addColumn
  TipoRet crearColumnaSingular_Tabla(tabla t, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol){
 	if (strcasecmp (nombreTabla, t->nombre) != 0){
@@ -91,7 +103,7 @@ TipoRet estructuraTablas_tabla(tabla t, char *nombreTabla){
 
 TipoRet InsertInto_Tabla(tabla & t, char *nombreTabla, char *columnasTupla, char *valoresTupla){
 // buscar si existe la tabla
-	return InsertInto_Columnas(t->colums, nombreTabla, columnasTupla, valoresTupla);
+	return InsertInto_Columnas(t->colums, columnasTupla, valoresTupla);
 //else
 
 }

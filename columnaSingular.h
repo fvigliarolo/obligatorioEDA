@@ -25,4 +25,6 @@ TipoRet estructuraTablas_Columnasingular(columnaSingular cs, char *nombreTabla);
 void imprimirColumnaSingular(columnaSingular cs);
 // Imprime datos de columna singular.
 
+TipoRet InsertInto_ColumnasSingular(columnaSingular & cs, char *columnasTupla, char *valoresTupla, int lenghtColumnasTupla, int lenghtValoresTupla);
+
 #endif

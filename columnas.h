@@ -22,7 +22,7 @@ TipoRet crearColumnaSingular_Columnas(columnas col, char *NombreCol, char *tipoC
 TipoRet estructuraTablas_Columnas(columnas t, char *nombreTabla);
 // Devuelve la estructura de las columnas de la tabla.
 
-TipoRet InsertInto_Columnas(columnas & col, char *nombreTabla, char *columnasTupla, char *valoresTupla);
+TipoRet InsertInto_Columnas(columnas & col, char *columnasTupla, char *valoresTupla);
 // Intenta realizar una insercion de datos en la tabla indicada por el usuario.
 
 bool existeColumnaSingular(columnaSingular cs, char * NombreCol);

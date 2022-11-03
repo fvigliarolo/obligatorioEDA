@@ -13,7 +13,8 @@ tabla eliminarTabla(tabla & t, char * nombreTabla);
 //elimina la tabla y sus tuplas
 //pre: la tabla a eliminar existe
 
-bool compararNombreTabla_tablas(tablas ts, char * nombreTabla); //Deberia funcionar bien, pues me compila
+// bool compararNombreTabla_tablas(tablas ts, char * nombreTabla); 
+//Deberia funcionar bien, pues me compila
 
 tabla crearColumnas_Tabla(tabla & t);
 

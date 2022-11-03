@@ -85,13 +85,6 @@ void crearColumSingular(columnaSingular cs, char *NombreCol, char *tipoCol, char
 				cs = cs->sig;
 			}
 		}
-		// cout << "Columna: " << auxUltimaCS->nombre 	<< endl ;
-		// cout << "Tipo: " << auxUltimaCS->tipo_dato  	<< endl ;
-		// cout << "Calificador: " << auxUltimaCS->calificador 	<< endl ;
-		// cout << "Anterior: " << auxUltimaCS->anterior->nombre 	<< endl ;
-		// cout << "Siguiente: " << auxUltimaCS->sig 	<< endl ;
-
-
 	}
 }
 TipoRet crearColumnaSingular_ColumnasSingular(columnaSingular cs, char *NombreCol, char *tipoCol, char *calificadorCol, bool primerCol){
@@ -167,6 +160,31 @@ bool existeColumnaSingular(columnaSingular cs, char *NombreCol){
 	}
 }
 
+TipoRet InsertInto_ColumnasSingular(columnaSingular & cs, char *columnasTupla, char *valoresTupla, int lenghtColumnasTupla, int lenghtValoresTupla){
+	char * param1;
+	param1 = strtok(columnasTupla, ":");
+	char * arrayColumnasTupla[lenghtColumnasTupla];
+	int i = 0;
+	while (param1 != NULL){
+		arrayColumnasTupla[i] = param1;
+		cout << arrayColumnasTupla[i] << endl ;
+		param1 = strtok(NULL, ":");
+		i += 1;
+	}
+
+	char * param2;
+	param2 = strtok(valoresTupla, ":");
+	char * arrayValoresTupla[lenghtValoresTupla];
+	int j = 0;
+
+	while (param2 != NULL){
+	arrayValoresTupla[j] = param2;
+	cout << arrayValoresTupla[j] << endl ;
+	param2 = strtok(NULL, ":");
+	j += 1;
+	}
+
+}
 
 
 

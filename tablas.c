@@ -44,7 +44,6 @@ TipoRet crearTabla_Tablas(tablas & ts, char * nombreTabla){
 }
 
 TipoRet EliminarTabla_tablas(tablas & ts, char * nombreTabla){
-	cout << "llegue a la linea 49 de tablas c";
 	if (isTablasEmpty_Tablas(ts)){
 		cout <<"no hay tabla que eliminar \n";
 		return 	ERROR;		
