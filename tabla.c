@@ -43,18 +43,18 @@ bool compararNombreTabla(tabla t, char * nombreTabla){
 }
 
 
-tabla crearColumnas_Tabla(tabla & t){
-	t->colums = crearColumnas(); 
-	return t;
-}
+// tabla crearColumnas_Tabla(tabla & t){
+// 	t->colums = crearColumnas(); 
+// 	return t;
+// }
 
-char * nombreTabla(tabla t){
-	return t->nombre;
-}
+// char * nombreTabla(tabla t){
+// 	return t->nombre;
+// }
 
-columnas getColumnas(tabla t){
-	return t->colums;
-}
+// columnas getColumnas(tabla t){
+// 	return t->colums;
+// }
 
 tabla eliminarTabla(tabla & t, char * nombreTabla){
 	int aux = strcasecmp(t->nombre,nombreTabla);
@@ -81,8 +81,7 @@ tabla eliminarTabla(tabla & t, char * nombreTabla){
 		if(isColumnasEmpty_Columnas(t->colums)){
 			primerCol = true;
 			t->colums = crearColumnas(); // Creamos un new(nodo_columnas)
-			crearColumnaSingular_Columnas(t->colums, NombreCol, tipoCol, calificadorCol, primerCol);
-			return OK;
+			return crearColumnaSingular_Columnas(t->colums, NombreCol, tipoCol, calificadorCol, primerCol);
 		}else{
 			primerCol = false;
 			return crearColumnaSingular_Columnas(t->colums, NombreCol, tipoCol, calificadorCol, primerCol);
