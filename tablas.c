@@ -82,4 +82,14 @@ TipoRet InsertInto_Tablas(tablas & ts, char *nombreTabla, char *columnasTupla, c
 		return InsertInto_Tabla(ts->t, nombreTabla, columnasTupla, valoresTupla);
 	}
 }
+TipoRet EliminarColumnaSing_tablas(tablas & ts, char *nombreTabla, char *nombreColS){
+	if (isTablasEmpty_Tablas(ts)){
+		//chequeamos que no este vacia
+		cout << "No se puede insertar. No se ha encontrado la tabla\n";
+		return ERROR;
+	}else{
+		  return EliminarColumnaSing_tabla(ts->t, nombreTabla, nombreColS);
+		 
+	}
+}
 

@@ -2,7 +2,6 @@
 #include <string.h>
 #include <iostream>
 // #include <stdbool.h> // para bool
-// Cambio
 
 
 using namespace std;
@@ -43,35 +42,6 @@ bool compararNombreTabla(tabla t, char * nombreTabla){
 	}
 }
 
-
-// tabla crearColumnas_Tabla(tabla & t){
-// 	t->colums = crearColumnas(); 
-// 	return t;
-// }
-
-// char * nombreTabla(tabla t){
-// 	return t->nombre;
-// }
-
-// columnas getColumnas(tabla t){
-// 	return t->colums;
-// }
-
-tabla eliminarTabla(tabla & t, char * nombreTabla){
-	int aux = strcasecmp(t->nombre,nombreTabla);
-		if(aux == 0){
-			tabla elim = t;
-			t = NULL;
-			
-			delete elim;
-			
-		}
-		else{
-			cout << "la tabla " << t << " no fue borrada" << endl;
-			return t;
-		}
-	return t;
-}
 //addColumn
  TipoRet crearColumnaSingular_Tabla(tabla t, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol){
 	if (strcasecmp (nombreTabla, t->nombre) != 0){
@@ -89,6 +59,15 @@ tabla eliminarTabla(tabla & t, char * nombreTabla){
 		}		
 	}
  }
+ TipoRet EliminarColumnaSing_tabla(tabla & t, char *nombreTabla, char *nombreColumS){
+	if (strcasecmp (nombreTabla, t->nombre) !=0 ){
+			return ERROR;
+	}else{
+		
+		return EliminarColumnaSing_columnas(t->colums, nombreColumS);
+	}
+ }
+ 
 
 // PrintMetaData()
 TipoRet estructuraTablas_tabla(tabla t, char *nombreTabla){
@@ -106,6 +85,21 @@ TipoRet InsertInto_Tabla(tabla & t, char *nombreTabla, char *columnasTupla, char
 	return InsertInto_Columnas(t->colums, columnasTupla, valoresTupla);
 //else
 
+}
+tabla eliminarTabla(tabla & t, char * nombreTabla){
+	int aux = strcasecmp(t->nombre,nombreTabla);
+		if(aux == 0){
+			tabla elim = t;
+			t = NULL;
+			
+			delete elim;
+			
+		}
+		else{
+			cout << "la tabla " << t << " no fue borrada" << endl;
+			return t;
+		}
+	return t;
 }
 
 

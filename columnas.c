@@ -25,7 +25,13 @@ bool isColumnasEmpty_Columnas(columnas col){
 TipoRet crearColumnaSingular_Columnas(columnas col, char *NombreCol, char *tipoCol, char *calificadorCol, bool primerCol){
 	if (col->columna_singular == NULL){
 		col->columna_singular = columnaSingularNull();
-		return crearColumnaSingular_ColumnasSingular(col->columna_singular, NombreCol, tipoCol, calificadorCol, primerCol);
+		if (crearColumnaSingular_ColumnasSingular(col->columna_singular, NombreCol, tipoCol, calificadorCol, primerCol) == ERROR){
+			cout << "comparo bien" << endl ;
+			return ERROR;
+		}else{
+			cout << "comparo mal" << endl ;
+			return ERROR;
+		}
 	}else{
 		return crearColumnaSingular_ColumnasSingular(col->columna_singular, NombreCol, tipoCol, calificadorCol, primerCol);
 	}
@@ -82,3 +88,16 @@ TipoRet InsertInto_Columnas(columnas & col, char *columnasTupla, char *valoresTu
 
 }
 
+//Eliminar columna Singular
+TipoRet EliminarColumnaSing_columnas(columnas Colum, char *NombreColS){
+	if (!existeColumnaSingular(Colum->columna_singular, NombreColS)){
+		cout << "No existe la columna " << NombreColS <<endl;
+		return ERROR;
+	}else{
+		
+		// if(colum->columnaSingular == NULL)
+		// 	colum->columnaSingular = NULL;
+		return eliminarColumnaSing(Colum->columna_singular, NombreColS);
+	}
+
+}

@@ -35,7 +35,10 @@ TipoRet InsertInto_Tablas(tablas & ts, char *nombreTabla, char *columnasTupla, c
 TipoRet estructuraTablas_tablas(tablas ts, char *nombreTabla);
 // Devuelve la estructura de las columnas de la tabla.
 
-TipoRet eliminarTabla_Tablas(tablas & ts, char *nombreTabla);
+TipoRet EliminarColumnaSing_tablas(tablas & ts, char *nombreTabla, char *nombreColS);
+// elimina columna singular
+
+// TipoRet eliminarTabla_Tablas(tablas & ts, char *nombreTabla);
 
 
 #endif

@@ -94,8 +94,14 @@ TipoRet crearColumnaSingular_ColumnasSingular(columnaSingular cs, char *NombreCo
 		while(aux){
 			if (primerCol){
 				aux = false;
-				crearColumSingular(cs, NombreCol, tipoCol, calificadorCol, primerCol);
-				return OK;
+				if (strcasecmp(calificadorCol, "PRIMARY_KEY") != 0){
+						cout << "La primer columna debe ser clave primaria" << endl ;
+						
+						return ERROR;
+				}else{
+					crearColumSingular(cs, NombreCol, tipoCol, calificadorCol, primerCol);
+					return OK;
+				}
 			}else{
 				if (isColumnaSingularEmpty(cs->sig)){
 					if(strcasecmp(NombreCol, cs->nombre) == 0){
@@ -160,6 +166,19 @@ bool existeColumnaSingular(columnaSingular cs, char *NombreCol){
 	}
 }
 
+columnaSingular primerPosicion(columnaSingular & cs){
+	bool aux = true;
+	while (aux){
+		if (cs->anterior != NULL){
+			cs = cs->anterior;
+		}else{
+			aux = false;
+			return cs;
+		}
+	}
+}
+
+
 TipoRet InsertInto_ColumnasSingular(columnaSingular & cs, char *columnasTupla, char *valoresTupla, int lenghtColumnasTupla, int lenghtValoresTupla){
 	char * param1;
 	param1 = strtok(columnasTupla, ":");
@@ -184,9 +203,41 @@ TipoRet InsertInto_ColumnasSingular(columnaSingular & cs, char *columnasTupla, c
 	j += 1;
 	}
 
+	// cs = primerPosicion(cs);
+
+	bool aux = true;
+	while (aux){
+		if (cs->anterior != NULL){
+			cs = cs->anterior;
+		}else{
+			aux = false;
+		}
+	}
+
+	cout << cs->nombre << endl ;
 }
 
+void eliminarC(columnaSingular & cs, char *NombreColumnaSingular){
+		while(cs->sig!=NULL){
+			int aux = compararNombreColumnaSingular(cs, NombreColumnaSingular);
+			if(aux == 0){				
+				columnaSingular elim = cs;//pa borrar
+				columnaSingular ant = cs->anterior; // apunta al nodo anterior
+								ant->sig = cs->sig;
+				cs = ant->sig;
+				delete elim;//elimino
+			}else{
+				cs = cs->sig;
+			}
+		}
+		cout <<"se elimino la colS" << endl ;
+}
 
+TipoRet eliminarColumnaSing(columnaSingular & cs, char *NombreColumnaSingular){
+	eliminarC(cs, NombreColumnaSingular);
+	cout << "linea 45 de columnaSingular" << endl ;
+	return OK;		
+}
 
 
 

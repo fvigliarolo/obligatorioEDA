@@ -47,7 +47,7 @@ TipoRet addCol (bd & bd, char *nombreTabla, char *NombreCol, char *tipoCol, char
 
 TipoRet dropCol (bd & bd, char *nombreTabla, char *NombreCol){
 	//cout << " - dropCol " << nombreTabla << " " << NombreCol << endl;;
-	return NO_IMPLEMENTADA;
+	return EliminarColumnaSing_tablas(bd->ts, nombreTabla, NombreCol);
 }
 
 TipoRet alterCol (bd & bd, char * nombreTabla, char * nombreCol, char *tipoColNuevo, char *calificadorColNuevo, char *nombreColNuevo){

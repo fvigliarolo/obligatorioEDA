@@ -31,6 +31,9 @@ TipoRet crearColumnaSingular_Tabla(tabla t, char *nombreTabla, char *NombreCol, 
 // pre: no puede haber otra columna con el mismo nombre.
 // pre: no puede haber 2 primary key
 
+TipoRet EliminarColumnaSing_tabla(tabla & t, char *nombreTabla, char *nombreColumS);
+// Eliminar columna sing
+
 TipoRet estructuraTablas_tabla(tabla t, char *nombreTabla);
 // Devuelve la estructura de las columnas de la tabla.
 
