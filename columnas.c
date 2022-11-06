@@ -26,11 +26,9 @@ TipoRet crearColumnaSingular_Columnas(columnas col, char *NombreCol, char *tipoC
 	if (col->columna_singular == NULL){
 		col->columna_singular = columnaSingularNull();
 		if (crearColumnaSingular_ColumnasSingular(col->columna_singular, NombreCol, tipoCol, calificadorCol, primerCol) == ERROR){
-			cout << "comparo bien" << endl ;
 			return ERROR;
 		}else{
-			cout << "comparo mal" << endl ;
-			return ERROR;
+			return OK;
 		}
 	}else{
 		return crearColumnaSingular_ColumnasSingular(col->columna_singular, NombreCol, tipoCol, calificadorCol, primerCol);
@@ -39,7 +37,12 @@ TipoRet crearColumnaSingular_Columnas(columnas col, char *NombreCol, char *tipoC
 
 // PrintMetaData()
 TipoRet estructuraTablas_Columnas(columnas col, char *nombreTabla){
-	return estructuraTablas_Columnasingular(col->columna_singular, nombreTabla);
+	if (col->columna_singular == NULL){
+		cout << "No se han agregado columnas hasta el momento." << endl ;
+		return ERROR;
+	}else{
+		return estructuraTablas_Columnasingular(col->columna_singular, nombreTabla);
+	}
 }
 
 TipoRet InsertInto_Columnas(columnas & col, char *columnasTupla, char *valoresTupla){
@@ -94,9 +97,6 @@ TipoRet EliminarColumnaSing_columnas(columnas Colum, char *NombreColS){
 		cout << "No existe la columna " << NombreColS <<endl;
 		return ERROR;
 	}else{
-		
-		// if(colum->columnaSingular == NULL)
-		// 	colum->columnaSingular = NULL;
 		return eliminarColumnaSing(Colum->columna_singular, NombreColS);
 	}
 

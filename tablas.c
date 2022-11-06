@@ -68,6 +68,7 @@ TipoRet crearColumSingular_Columnas(tablas & ts, char *nombreTabla, char *Nombre
 
 // PrintMetaData()
 TipoRet estructuraTablas_tablas(tablas ts, char *nombreTabla){
+	// cout << "tablas 71" ;
 	return estructuraTablas_tabla(ts->t, nombreTabla);
 }
 

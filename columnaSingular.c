@@ -2,6 +2,7 @@
 #include <string.h>
 #include <iostream>
 #include <stdbool.h> // para bool
+#include <ctype.h> // isdigit()
 
 
 
@@ -96,7 +97,8 @@ TipoRet crearColumnaSingular_ColumnasSingular(columnaSingular cs, char *NombreCo
 				aux = false;
 				if (strcasecmp(calificadorCol, "PRIMARY_KEY") != 0){
 						cout << "La primer columna debe ser clave primaria" << endl ;
-						
+						columnaSingular elim = cs;
+						delete elim;
 						return ERROR;
 				}else{
 					crearColumSingular(cs, NombreCol, tipoCol, calificadorCol, primerCol);
@@ -128,9 +130,8 @@ TipoRet crearColumnaSingular_ColumnasSingular(columnaSingular cs, char *NombreCo
 
 // PrintMetaData()
 TipoRet estructuraTablas_Columnasingular(columnaSingular cs, char *nombreTabla){
-
-		bool aux = true;
-		while(aux){
+	bool aux = true;
+	while(aux){
 		cout << "========================================" << endl ;
 		if (isColumnaSingularEmpty(cs->sig)){
 			aux = false;
@@ -166,7 +167,7 @@ bool existeColumnaSingular(columnaSingular cs, char *NombreCol){
 	}
 }
 
-columnaSingular primerPosicion(columnaSingular & cs){
+columnaSingular primerPosicion(columnaSingular cs){
 	bool aux = true;
 	while (aux){
 		if (cs->anterior != NULL){
@@ -178,15 +179,49 @@ columnaSingular primerPosicion(columnaSingular & cs){
 	}
 }
 
+bool verificaTipoDato(columnaSingular cs, char *dato, char *columna){
+	cs = primerPosicion(cs);
+
+	bool aux = true;
+	while(aux){
+		if(strcasecmp(cs->nombre, columna) == 0){
+
+			if(strcasecmp(cs->tipo_dato, "integer") == 0){
+				return isdigit(dato[0]);
+			}else{
+				return true;
+			}
+
+		}else{
+			cs = cs->sig;
+		}
+	}
+
+}
+
+columnaSingular igualarCSaColumna(columnaSingular cs, char *columnaNombre){
+	cs = primerPosicion(cs);
+	bool aux = true;
+	while (aux){
+		if(strcasecmp(cs->nombre, columnaNombre) == 0){
+			aux = false;
+			return cs;
+		}else{
+			cs = cs->sig;
+		}
+	}
+}
 
 TipoRet InsertInto_ColumnasSingular(columnaSingular & cs, char *columnasTupla, char *valoresTupla, int lenghtColumnasTupla, int lenghtValoresTupla){
+	int errores = 0;
+	
 	char * param1;
 	param1 = strtok(columnasTupla, ":");
 	char * arrayColumnasTupla[lenghtColumnasTupla];
 	int i = 0;
 	while (param1 != NULL){
 		arrayColumnasTupla[i] = param1;
-		cout << arrayColumnasTupla[i] << endl ;
+		// cout << arrayColumnasTupla[i] << endl ;
 		param1 = strtok(NULL, ":");
 		i += 1;
 	}
@@ -197,95 +232,79 @@ TipoRet InsertInto_ColumnasSingular(columnaSingular & cs, char *columnasTupla, c
 	int j = 0;
 
 	while (param2 != NULL){
-	arrayValoresTupla[j] = param2;
-	cout << arrayValoresTupla[j] << endl ;
-	param2 = strtok(NULL, ":");
-	j += 1;
+		arrayValoresTupla[j] = param2;
+		// cout << arrayValoresTupla[j] << endl ;
+		param2 = strtok(NULL, ":");
+		j += 1;
 	}
 
-	// cs = primerPosicion(cs);
+	cs = primerPosicion(cs);
 
-	bool aux = true;
-	while (aux){
-		if (cs->anterior != NULL){
-			cs = cs->anterior;
-		}else{
-			aux = false;
+	if (strcasecmp(cs->nombre, arrayColumnasTupla[0]) == 0){
+		// cout << "La primer columna es PRIMARY_KEY. Se puede hacer el insert." << endl ;
+		for(int p = 0; p<lenghtColumnasTupla; p++){
+			if(!verificaTipoDato(cs, arrayValoresTupla[p], arrayColumnasTupla[p])){
+				errores += 1;
+				cout << arrayValoresTupla[i] << " No respeta el tipo de dato" << endl ;
+			}
 		}
+	}else{
+		cout <<  "El primer atributo del insert debe ser la PRIMARY_KEY." << endl ;
+		errores += 1;
 	}
 
-	cout << cs->nombre << endl ;
+	if (errores == 0){
+		for (int l = 0; l<lenghtColumnasTupla; l++){
+			cs = igualarCSaColumna(cs, arrayColumnasTupla[l]);
+			cs->atr_simple = atributoSimpleNull();
+			if (InsertInto_AtributoSimple(cs->atr_simple, arrayValoresTupla[l], l) == ERROR){
+				errores += 1;
+				// implementar una solucion para eliminar todas las tuplas que se ingresaron
+			}
+			imprimirAtributo(cs->atr_simple,l);
+		}
+		
+
+		if(errores == 0){
+			return OK;
+		}else{
+			return ERROR;
+		}
+	}else{
+		return ERROR;
+	}
 }
 
 void eliminarC(columnaSingular & cs, char *NombreColumnaSingular){
-		while(cs->sig!=NULL){
-			int aux = compararNombreColumnaSingular(cs, NombreColumnaSingular);
-			if(aux == 0){				
+				
+				// ni idea porque no imprime los omentario 
+				//
+			
 				columnaSingular elim = cs;//pa borrar
 				columnaSingular ant = cs->anterior; // apunta al nodo anterior
 								ant->sig = cs->sig;
 				cs = ant->sig;
 				delete elim;//elimino
-			}else{
-				cs = cs->sig;
-			}
-		}
-		cout <<"se elimino la colS" << endl ;
+			
+		cout <<"Se elimino la columna " << NombreColumnaSingular << endl ;
 }
 
 TipoRet eliminarColumnaSing(columnaSingular & cs, char *NombreColumnaSingular){
-	eliminarC(cs, NombreColumnaSingular);
-	cout << "linea 45 de columnaSingular" << endl ;
+		cout << " porfsi";
+		while(cs->sig != NULL){
+			cout << " entre ";
+			int aux = compararNombreColumnaSingular(cs, NombreColumnaSingular);
+			if(aux == 0){
+				cout << " encontre la columna" << cs << endl;
+				if(strcasecmp(cs->calificador, "PRIMARY_KEY") == 0)//arranque de cero porque se habia roto pal carajo 
+					cout << " la columna es PK";
+					if(cs->sig == NULL)
+					cout << " es la unica columna ";
+				eliminarC(cs, NombreColumnaSingular);
+			}else{
+				cs = cs->sig;
+			}			
+		}
+		cout << " ddddaaa";
 	return OK;		
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	//  	// verificamos que no exista otra cs con mismo nombre
-	
-	// 		bool aux = true;
-	// 		do{
-	// 			if(compararNombreColumnaSingular_Tablas(ts, NombreCol)){
-	// 				cout << "Imposible Crear Columna. Ya existe una columna con el nombre\n";
-	// 				aux = false;
-	// 				return ERROR;
-	// 			}else{
-	// 				if(isColumnasSingularEmpty_Tablas(getColumnaSig_Tablas(ts))){
-	// 					//si col siguiente no es null, seguimos comparando
-	// 					ts = getColumnaSig_Tabl	as(ts);
-	// 					// cout << getColumnaSig_Tablas(ts);
-						
-	// 				}else{
-	// 					//si el siguiente es null, ya se compararon todas las colums y no hay repetido.
-	// 					crearColumSingular_Tablas(ts, nombreTabla, tipoCol, calificadorCol);
-	// 					aux = false;
-	// 					return OK;
-	// 				}
-	// 			}
-	// 		}while(aux);
-	// 	}
-
-		// return OK;

@@ -16,3 +16,8 @@ printTables()
 salir()
 
 dropCol(Personas, CI)
+dropCol(Personas, Apellido)
+
+
+
+insertInto(Personas, Apellido:Nombre:CI, 1111111:Perez:Fernando)
