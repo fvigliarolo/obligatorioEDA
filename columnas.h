@@ -27,6 +27,6 @@ TipoRet InsertInto_Columnas(columnas & col, char *columnasTupla, char *valoresTu
 
 bool existeColumnaSingular(columnaSingular cs, char * NombreCol);
 
-TipoRet EliminarColumnaSing_columnas(columnas Colum, char *NombreColS);
+TipoRet EliminarColumnaSing_columnas(columnas & Colum, char *NombreColS);
 
 #endif

@@ -10,8 +10,7 @@ atributo_simple atributoSimpleNull();
 
 void imprimirAtributo(atributo_simple & as, int id);
 
-TipoRet InsertInto_AtributoSimple(atributo_simple & as, char *valorAtributo, int id);
+void insertInto(atributo_simple & as, char *valorAtributo, int id, bool primerAtributo);
 
-void InsertInto(atributo_simple & as, char *valorAtributo, int id);
-
+TipoRet InsertInto_AtributoSimple(atributo_simple & as, char *valorAtributo, int id, bool primerAtributo);
 #endif

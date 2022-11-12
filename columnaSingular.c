@@ -90,7 +90,7 @@ void crearColumSingular(columnaSingular cs, char *NombreCol, char *tipoCol, char
 }
 TipoRet crearColumnaSingular_ColumnasSingular(columnaSingular cs, char *NombreCol, char *tipoCol, char *calificadorCol, bool primerCol){
 
-
+		
 		bool aux = true;
 		while(aux){
 			if (primerCol){
@@ -238,7 +238,16 @@ TipoRet InsertInto_ColumnasSingular(columnaSingular & cs, char *columnasTupla, c
 		j += 1;
 	}
 
-	cs = primerPosicion(cs);
+	// cs = primerPosicion(cs);
+	bool aux2 = true;
+	while (aux2){
+		if (cs->anterior != NULL){
+			cs = cs->anterior;
+		}else{
+			aux2 = false;
+		}
+	}
+
 
 	if (strcasecmp(cs->nombre, arrayColumnasTupla[0]) == 0){
 		// cout << "La primer columna es PRIMARY_KEY. Se puede hacer el insert." << endl ;
@@ -256,12 +265,14 @@ TipoRet InsertInto_ColumnasSingular(columnaSingular & cs, char *columnasTupla, c
 	if (errores == 0){
 		for (int l = 0; l<lenghtColumnasTupla; l++){
 			cs = igualarCSaColumna(cs, arrayColumnasTupla[l]);
-			cs->atr_simple = atributoSimpleNull();
-			if (InsertInto_AtributoSimple(cs->atr_simple, arrayValoresTupla[l], l) == ERROR){
-				errores += 1;
-				// implementar una solucion para eliminar todas las tuplas que se ingresaron
+			if(cs->atr_simple == NULL){
+				cs->atr_simple = atributoSimpleNull();
+				if (InsertInto_AtributoSimple(cs->atr_simple, arrayValoresTupla[l], l, true) == ERROR){ errores +=1; }
+			}else{
+				if (InsertInto_AtributoSimple(cs->atr_simple, arrayValoresTupla[l], l, false) == ERROR){ errores += 1; }
+					// implementar una solucion para eliminar todas las tuplas que se ingresaron
+				imprimirAtributo(cs->atr_simple,l);
 			}
-			imprimirAtributo(cs->atr_simple,l);
 		}
 		
 
@@ -276,35 +287,61 @@ TipoRet InsertInto_ColumnasSingular(columnaSingular & cs, char *columnasTupla, c
 }
 
 void eliminarC(columnaSingular & cs, char *NombreColumnaSingular){
-				
-				// ni idea porque no imprime los omentario 
-				//
-			
+	
 				columnaSingular elim = cs;//pa borrar
 				columnaSingular ant = cs->anterior; // apunta al nodo anterior
 								ant->sig = cs->sig;
-				cs = ant->sig;
-				delete elim;//elimino
-			
-		cout <<"Se elimino la columna " << NombreColumnaSingular << endl ;
+								delete elim;//elimino
+								cs = primerPosicion(cs);
 }
 
 TipoRet eliminarColumnaSing(columnaSingular & cs, char *NombreColumnaSingular){
-		cout << " porfsi";
-		while(cs->sig != NULL){
-			cout << " entre ";
-			int aux = compararNombreColumnaSingular(cs, NombreColumnaSingular);
-			if(aux == 0){
-				cout << " encontre la columna" << cs << endl;
-				if(strcasecmp(cs->calificador, "PRIMARY_KEY") == 0)//arranque de cero porque se habia roto pal carajo 
-					cout << " la columna es PK";
-					if(cs->sig == NULL)
-					cout << " es la unica columna ";
-				eliminarC(cs, NombreColumnaSingular);
+	bool auxi = true;
+	cs = primerPosicion(cs);
+	while(auxi){ 
+		if(cs->sig != NULL){
+			if(strcasecmp(cs->nombre, NombreColumnaSingular) == 0){
+				if(strcasecmp(cs->calificador, "PRIMARY_KEY")!= 0){
+					auxi = false;
+					columnaSingular elim = cs;//pa borrar
+					columnaSingular ant = cs->anterior; // apunta al nodo anterior
+									ant->sig = cs->sig;
+									delete elim;//elimino
+					cs = primerPosicion(cs);
+							
+					return OK;
+				}else{
+					auxi = false;
+					cout << "No se puede eliminar PRIMARY_KEY mientras existan otras columnas" << endl ;
+					return ERROR;
+				}
 			}else{
 				cs = cs->sig;
-			}			
+			}		
+			
+		}else{
+			if(strcasecmp(cs->nombre, NombreColumnaSingular) == 0){
+				if(cs->anterior != NULL){
+						auxi = false;
+						columnaSingular elim = cs;//pa borrar
+						columnaSingular ant = cs->anterior; // apunta al nodo anterior
+										ant->sig = cs->sig;
+										delete elim;//elimino
+						cs = primerPosicion(cs);
+						return OK;
+				}else{
+					auxi = false;
+					cout << "Hay que eliminar la PRIMARY_KEY" << endl ;
+					// columnaSingular elim = cs;
+					// delete elim;
+					
+					return OK;
+				}
+			}else{
+				auxi = false;
+				cout << "No existe la columna de nombre: " << NombreColumnaSingular << endl ;
+				return ERROR;
+			}
 		}
-		cout << " ddddaaa";
-	return OK;		
+	}
 }

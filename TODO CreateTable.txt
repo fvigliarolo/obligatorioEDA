@@ -6,8 +6,10 @@ No se deberia poder eliminar una columna si hay mas de una columna, y es la clav
 
 
 
-para verificar si los datos son validos al hacer insertInto:
+una vez dentro de atributo_simple.c tenemos que verificar si ya existe una tupla con la clave primaria.
 
-cuando estamos iterando dentro de columna_singular.c, 
-usar la funcion verificaTipoDato() para cargar la variable "errores".
+Ademas, hay que hacer alguna funcion para eliminar todos los nodos de una tupla en caso de que en medio de la
+insercion se produzca un error.
+
+Tambien hay que ver la logica que hay que usar para agregar una segunda tupla. (atributo->sig)
 

@@ -92,7 +92,7 @@ TipoRet InsertInto_Columnas(columnas & col, char *columnasTupla, char *valoresTu
 }
 
 //Eliminar columna Singular
-TipoRet EliminarColumnaSing_columnas(columnas Colum, char *NombreColS){
+TipoRet EliminarColumnaSing_columnas(columnas & Colum, char *NombreColS){
 	if (!existeColumnaSingular(Colum->columna_singular, NombreColS)){
 		cout << "No existe la columna " << NombreColS <<endl;
 		return ERROR;

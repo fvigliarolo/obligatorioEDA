@@ -17,6 +17,7 @@ salir()
 
 dropCol(Personas, CI)
 dropCol(Personas, Apellido)
+dropCol(Personas, Nombre)
 
 
 
