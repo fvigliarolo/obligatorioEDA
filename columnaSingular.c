@@ -302,13 +302,15 @@ TipoRet eliminarColumnaSing(columnaSingular & cs, char *NombreColumnaSingular){
 		if(cs->sig != NULL){
 			if(strcasecmp(cs->nombre, NombreColumnaSingular) == 0){
 				if(strcasecmp(cs->calificador, "PRIMARY_KEY")!= 0){
+					columnaSingular elim;
 					auxi = false;
-					columnaSingular elim = cs;//pa borrar
-					columnaSingular ant = cs->anterior; // apunta al nodo anterior
-									ant->sig = cs->sig;
-									delete elim;//elimino
-					cs = primerPosicion(cs);
-							
+
+					cs->anterior->sig	= cs->sig;
+					cs->sig->anterior	= cs->anterior;
+					elim 				= cs;
+					delete elim;
+					cs 					= cs->anterior;
+			
 					return OK;
 				}else{
 					auxi = false;
@@ -321,20 +323,16 @@ TipoRet eliminarColumnaSing(columnaSingular & cs, char *NombreColumnaSingular){
 			
 		}else{
 			if(strcasecmp(cs->nombre, NombreColumnaSingular) == 0){
+				columnaSingular elim;
+				auxi = false;
 				if(cs->anterior != NULL){
-						auxi = false;
-						columnaSingular elim = cs;//pa borrar
-						columnaSingular ant = cs->anterior; // apunta al nodo anterior
-										ant->sig = cs->sig;
-										delete elim;//elimino
-						cs = primerPosicion(cs);
-						return OK;
+					cs->anterior->sig	= NULL;
+					elim				= cs;
+					cs 					= cs->anterior;
+					delete elim;
+					return OK;
 				}else{
-					auxi = false;
 					cout << "Hay que eliminar la PRIMARY_KEY" << endl ;
-					// columnaSingular elim = cs;
-					// delete elim;
-					
 					return OK;
 				}
 			}else{
