@@ -112,7 +112,7 @@ TipoRet printTables(bd bd){
 	return OK;
 }
 
-TipoRet printMetadata(bd bd, char *nombreTabla){
+TipoRet printMetadata(bd & bd, char *nombreTabla){
 	//cout << " - printMetadata " << nombreTabla << endl;
 	return estructuraTablas_tablas(bd->ts, nombreTabla);
 }

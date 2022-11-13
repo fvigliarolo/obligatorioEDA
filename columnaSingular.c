@@ -22,6 +22,10 @@ columnaSingular columnaSingularNull(){
 
 }
 
+void imprimircs(columnaSingular cs){
+	cout << "cs actual " << cs << endl ;
+}
+
 columnaSingular columnaSingularNULL(){
 	return NULL;	
 }
@@ -40,7 +44,7 @@ bool compararNombreColumnaSingular(columnaSingular cs, char * nombreC){
 }
 
 
-void imprimirColumnaSingular(columnaSingular cs){
+void imprimirColumnaSingular(columnaSingular & cs){
 			cout << "Columna:	" << cs->nombre 	<< endl ;
 			cout << "Tipo:		" << cs->tipo_dato  	<< endl ;
 			cout << "Calificador:	" << cs->calificador 	<< endl ;
@@ -129,7 +133,7 @@ TipoRet crearColumnaSingular_ColumnasSingular(columnaSingular cs, char *NombreCo
 }
 
 // PrintMetaData()
-TipoRet estructuraTablas_Columnasingular(columnaSingular cs, char *nombreTabla){
+TipoRet estructuraTablas_Columnasingular(columnaSingular & cs, char *nombreTabla){
 	bool aux = true;
 	while(aux){
 		cout << "========================================" << endl ;
@@ -284,6 +288,21 @@ TipoRet InsertInto_ColumnasSingular(columnaSingular & cs, char *columnasTupla, c
 	}else{
 		return ERROR;
 	}
+
+	bool iterar = true;
+
+	// while(iterar){
+	// 	if (errores == 0){
+
+	// 	}else{
+	// 		iterar = false;
+	// 		return ERROR;
+	// 	}
+	// }
+
+
+
+
 }
 
 void eliminarC(columnaSingular & cs, char *NombreColumnaSingular){
@@ -333,6 +352,12 @@ TipoRet eliminarColumnaSing(columnaSingular & cs, char *NombreColumnaSingular){
 					return OK;
 				}else{
 					cout << "Hay que eliminar la PRIMARY_KEY" << endl ;
+					cs->anterior 	= NULL;
+					cs->sig 		= NULL;
+					elim 			= cs;
+					delete elim;
+					cs 				= NULL;
+					cout << cs << endl ;
 					return OK;
 				}
 			}else{

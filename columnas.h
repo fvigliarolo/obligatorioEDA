@@ -19,7 +19,7 @@ bool isColumnasEmpty_Columnas(columnas col);
 TipoRet crearColumnaSingular_Columnas(columnas col, char *NombreCol, char *tipoCol, char *calificadorCol, bool primerCol);
 // Agrega una columna nueva a la tabla.
 
-TipoRet estructuraTablas_Columnas(columnas t, char *nombreTabla);
+TipoRet estructuraTablas_Columnas(columnas & col, char *nombreTabla);
 // Devuelve la estructura de las columnas de la tabla.
 
 TipoRet InsertInto_Columnas(columnas & col, char *columnasTupla, char *valoresTupla);
@@ -28,5 +28,7 @@ TipoRet InsertInto_Columnas(columnas & col, char *columnasTupla, char *valoresTu
 bool existeColumnaSingular(columnaSingular cs, char * NombreCol);
 
 TipoRet EliminarColumnaSing_columnas(columnas & Colum, char *NombreColS);
+
+
 
 #endif

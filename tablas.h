@@ -32,7 +32,7 @@ tablas crearColumnas_Tablas(tablas & ts);
 TipoRet InsertInto_Tablas(tablas & ts, char *nombreTabla, char *columnasTupla, char *valoresTupla);
 // Intenta realizar una insercion de datos en la tabla indicada por el usuario.
 
-TipoRet estructuraTablas_tablas(tablas ts, char *nombreTabla);
+TipoRet estructuraTablas_tablas(tablas & ts, char *nombreTabla);
 // Devuelve la estructura de las columnas de la tabla.
 
 TipoRet EliminarColumnaSing_tablas(tablas & ts, char *nombreTabla, char *nombreColS);

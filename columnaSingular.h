@@ -19,10 +19,10 @@ bool compararNombreColumnaSingular(columnaSingular cs, char * nombreC);
 TipoRet crearColumnaSingular_ColumnasSingular(columnaSingular cs, char *NombreCol, char *tipoCol, char *calificadorCol, bool primerCol);
 // Agrega una columna nueva a la tabla.
 
-TipoRet estructuraTablas_Columnasingular(columnaSingular cs, char *nombreTabla);
+TipoRet estructuraTablas_Columnasingular(columnaSingular & cs, char *nombreTabla);
 // Devuelve la estructura de las columnas de la tabla.
 
-void imprimirColumnaSingular(columnaSingular cs);
+void imprimirColumnaSingular(columnaSingular & cs);
 // Imprime datos de columna singular.
 
 columnaSingular primerPosicion(columnaSingular cs);
@@ -36,6 +36,8 @@ TipoRet eliminarColumnaSing(columnaSingular & cs,char *NombreColumnaSingular);
 void eliminarC(columnaSingular & cs, char *NombreColumnaSingular);
 
 bool verificaTipoDato(columnaSingular cs, char *dato, char *columna);
+
+void imprimircs(columnaSingular cs);
 
 
 #endif

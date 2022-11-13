@@ -34,7 +34,7 @@ TipoRet crearColumnaSingular_Tabla(tabla t, char *nombreTabla, char *NombreCol, 
 TipoRet EliminarColumnaSing_tabla(tabla & t, char *nombreTabla, char *nombreColumS);
 // Eliminar columna sing
 
-TipoRet estructuraTablas_tabla(tabla t, char *nombreTabla);
+TipoRet estructuraTablas_tabla(tabla & t, char *nombreTabla);
 // Devuelve la estructura de las columnas de la tabla.
 
 TipoRet InsertInto_Tabla(tabla & t, char *nombreTabla, char *columnasTupla, char *valoresTupla);

@@ -70,7 +70,7 @@ bool compararNombreTabla(tabla t, char * nombreTabla){
  
 
 // PrintMetaData()
-TipoRet estructuraTablas_tabla(tabla t, char *nombreTabla){
+TipoRet estructuraTablas_tabla(tabla & t, char *nombreTabla){
 	if (strcasecmp (nombreTabla, t->nombre) == 0){
 		return estructuraTablas_Columnas(t->colums, nombreTabla);
 	}else{

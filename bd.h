@@ -120,7 +120,7 @@ TipoRet printdatatable (bd bd, char *NombreTabla);
 TipoRet printTables(bd bd);
 // Imprime los nombres de las tablas de la base de datos del sistema, ordenados alfabéticamente de menor a mayor.
 
-TipoRet printMetadata(bd bd, char *nombreTabla);
+TipoRet printMetadata(bd & bd, char *nombreTabla);
 // Imprime el esquema de la tabla de nombre nombreTabla, si éste existe. Es decir, imprime el nombre
 // de la Tabla, los nombres de sus columnas en el orden correspondiente, indicando para cada columna su
 // tipo de datos y calificador si lo tuviera.

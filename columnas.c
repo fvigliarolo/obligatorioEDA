@@ -24,7 +24,9 @@ bool isColumnasEmpty_Columnas(columnas col){
 //addColumn
 TipoRet crearColumnaSingular_Columnas(columnas col, char *NombreCol, char *tipoCol, char *calificadorCol, bool primerCol){
 	if (col->columna_singular == NULL){
+		imprimircs(col->columna_singular);
 		col->columna_singular = columnaSingularNull();
+		imprimircs(col->columna_singular);
 		if (crearColumnaSingular_ColumnasSingular(col->columna_singular, NombreCol, tipoCol, calificadorCol, primerCol) == ERROR){
 			return ERROR;
 		}else{
@@ -36,7 +38,7 @@ TipoRet crearColumnaSingular_Columnas(columnas col, char *NombreCol, char *tipoC
 }
 
 // PrintMetaData()
-TipoRet estructuraTablas_Columnas(columnas col, char *nombreTabla){
+TipoRet estructuraTablas_Columnas(columnas & col, char *nombreTabla){
 	if (col->columna_singular == NULL){
 		cout << "No se han agregado columnas hasta el momento." << endl ;
 		return ERROR;
@@ -98,6 +100,7 @@ TipoRet EliminarColumnaSing_columnas(columnas & Colum, char *NombreColS){
 		return ERROR;
 	}else{
 		return eliminarColumnaSing(Colum->columna_singular, NombreColS);
+	Colum->columna_singular = NULL;
 	}
 
 }
