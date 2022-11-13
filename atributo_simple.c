@@ -16,26 +16,29 @@ atributo_simple atributoSimpleNull(){
 }
 
 void imprimirAtributo(atributo_simple & as, int id){
-	cout << as->valor << endl ;
-	cout << as->identificador << endl;
+		cout << as->valor << endl ;
+		cout << as->identificador << endl;
 }
 
-TipoRet InsertInto_AtributoSimple(atributo_simple & as, char *valorAtributo, int id, bool primerAtributo){
-	if (primerAtributo){
-		insertInto(as, valorAtributo, id, primerAtributo);
-	}
-		while(as->sig != NULL){
+
+void imprimirAll(atributo_simple as){
+	while(as != NULL){
+		if(strcasecmp(as->valor, "__EMPTY") == 0){
+			cout << "valor: " << as->valor_secundario << endl ;
+		}else{
+			cout << "valor: " << as->valor << endl ;
+		}
+		cout << "identificador: " << as->identificador << endl;
+		// cout << "valor secundario: " << as->valor_secundario << endl;
+		cout << "===========================================" << endl ;
 		as = as->sig;
 	}
 
-
-return OK;
 }
 
 void insertInto(atributo_simple & as, char *valorAtributo, int id, bool primerAtributo){
 	atributo_simple asSiguiente = NULL;
 	int valorInt;
-
 
 	if(isdigit(valorAtributo[0])){
 		valorInt = atoi(valorAtributo);
@@ -43,20 +46,31 @@ void insertInto(atributo_simple & as, char *valorAtributo, int id, bool primerAt
 		as->valor = "__EMPTY";
 	}else{
 		valorInt = 99;
-
 		as->valor_secundario = &valorInt; //no pongo 0 para diferenciar del valor NULL.
 		as->valor = valorAtributo;
 	}
-		
+	as->identificador 				= id;
+	as->sig 						= asSiguiente;
+	
+}
+TipoRet InsertInto_AtributoSimple(atributo_simple & as, char *valorAtributo, int id, bool primerAtributo){
 	if (primerAtributo){
-		as->sig 						= NULL;
-		as->identificador 				= id;
-		as->sig 						= asSiguiente;
+		insertInto(as, valorAtributo, id, primerAtributo);
+	}else{
+		bool aux = true;
+		while(aux){
+			if (as->sig != NULL){
+				as = as->sig;
+			}else{
+				aux = false;
+			}
+		}
+		atributo_simple nuevo = atributoSimpleNull();
+		as->sig = nuevo;
+		insertInto(nuevo, valorAtributo, id, primerAtributo);
 	}
-	// else{
-	// 	bool aux = true;
-	// 	while(aux){
-	// 		if ()
-	// 	}
-	// }
+	imprimirAll(as);
+
+
+return OK;
 }

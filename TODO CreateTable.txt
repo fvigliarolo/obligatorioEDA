@@ -1,15 +1,16 @@
-dropCol:
-=========
-
-No se deberia poder eliminar una columna si hay mas de una columna, y es la clave primaria.
-
+addCol
+======
+no se deberia poder ingresar 2 columnas PRIMARY_KEY.
 
 
-
+insertInto
+==========
 una vez dentro de atributo_simple.c tenemos que verificar si ya existe una tupla con la clave primaria.
 
 Ademas, hay que hacer alguna funcion para eliminar todos los nodos de una tupla en caso de que en medio de la
 insercion se produzca un error.
 
-Tambien hay que ver la logica que hay que usar para agregar una segunda tupla. (atributo->sig)
+
+
+
 

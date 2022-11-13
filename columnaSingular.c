@@ -4,8 +4,6 @@
 #include <stdbool.h> // para bool
 #include <ctype.h> // isdigit()
 
-
-
 using namespace std;
 
 struct nodo_columnaSingular{
@@ -16,6 +14,15 @@ struct nodo_columnaSingular{
 	columnaSingular sig;	
 	columnaSingular anterior;	
 };
+
+
+int RandomString(int ch){
+	int result;
+	    for (int i = 0; i<ch; i++){
+        result += (rand() % 9);
+	}
+	return result;
+}
 
 columnaSingular columnaSingularNull(){
 	return new(nodo_columnaSingular); //aca no tendri que ser return null?
@@ -149,9 +156,22 @@ TipoRet estructuraTablas_Columnasingular(columnaSingular & cs, char *nombreTabla
 	return OK;
 }
 
+columnaSingular primerPosicion(columnaSingular cs){
+	bool aux = true;
+	while (aux){
+		if (cs->anterior != NULL){
+			cs = cs->anterior;
+		}else{
+			aux = false;
+			return cs;
+		}
+	}
+}
+
 bool existeColumnaSingular(columnaSingular cs, char *NombreCol){
 	bool aux = true;
-
+	cs = primerPosicion(cs);
+	
 	while (aux){
 		if (cs->sig == NULL){
 			aux = false;
@@ -171,17 +191,6 @@ bool existeColumnaSingular(columnaSingular cs, char *NombreCol){
 	}
 }
 
-columnaSingular primerPosicion(columnaSingular cs){
-	bool aux = true;
-	while (aux){
-		if (cs->anterior != NULL){
-			cs = cs->anterior;
-		}else{
-			aux = false;
-			return cs;
-		}
-	}
-}
 
 bool verificaTipoDato(columnaSingular cs, char *dato, char *columna){
 	cs = primerPosicion(cs);
@@ -267,15 +276,14 @@ TipoRet InsertInto_ColumnasSingular(columnaSingular & cs, char *columnasTupla, c
 	}
 
 	if (errores == 0){
+		int identificador = RandomString(8);
 		for (int l = 0; l<lenghtColumnasTupla; l++){
 			cs = igualarCSaColumna(cs, arrayColumnasTupla[l]);
 			if(cs->atr_simple == NULL){
 				cs->atr_simple = atributoSimpleNull();
-				if (InsertInto_AtributoSimple(cs->atr_simple, arrayValoresTupla[l], l, true) == ERROR){ errores +=1; }
+				if (InsertInto_AtributoSimple(cs->atr_simple, arrayValoresTupla[l], identificador, true) == ERROR){ errores +=1; }
 			}else{
-				if (InsertInto_AtributoSimple(cs->atr_simple, arrayValoresTupla[l], l, false) == ERROR){ errores += 1; }
-					// implementar una solucion para eliminar todas las tuplas que se ingresaron
-				imprimirAtributo(cs->atr_simple,l);
+				if (InsertInto_AtributoSimple(cs->atr_simple, arrayValoresTupla[l], identificador, false) == ERROR){ errores += 1; }
 			}
 		}
 		
@@ -289,16 +297,42 @@ TipoRet InsertInto_ColumnasSingular(columnaSingular & cs, char *columnasTupla, c
 		return ERROR;
 	}
 
+
+
+
+
 	bool iterar = true;
+	int l = 0;
 
-	// while(iterar){
-	// 	if (errores == 0){
+	while(iterar){
+		if (errores == 0){
+			if(l<lenghtColumnasTupla){
+				cs = igualarCSaColumna(cs, arrayColumnasTupla[l]);
+				if(cs->atr_simple == NULL){
+					cs->atr_simple = atributoSimpleNull();
+					if (InsertInto_AtributoSimple(cs->atr_simple, arrayValoresTupla[l], l, true) == ERROR){ errores +=1; }
+				}else{
+					if (InsertInto_AtributoSimple(cs->atr_simple, arrayValoresTupla[l], l, false) == ERROR){ errores += 1; }
+				}
 
-	// 	}else{
-	// 		iterar = false;
-	// 		return ERROR;
-	// 	}
-	// }
+			 l += 1;
+			}else{
+				iterar = false;
+				return OK;
+			}
+
+		}else{
+			// se eliminan todos los nodos creados y pertenecientes a la tupla.
+			iterar = false;
+			for (int k = 0; k<=l; k += 1){
+				cs = igualarCSaColumna(cs, arrayColumnasTupla[l]);
+				// eliminarAtributoSimple(cs, arrayValoresTupla[l]);
+				cout << "se tiene que eliminar de la columna: " <<   arrayColumnasTupla[l] << endl ;
+				cout << "El atributo: " <<   arrayValoresTupla[l] << endl ;
+			}
+			return ERROR;
+		}
+	}
 
 
 

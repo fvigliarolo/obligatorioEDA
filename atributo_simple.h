@@ -12,5 +12,7 @@ void imprimirAtributo(atributo_simple & as, int id);
 
 void insertInto(atributo_simple & as, char *valorAtributo, int id, bool primerAtributo);
 
+void imprimirAll(atributo_simple as);
+
 TipoRet InsertInto_AtributoSimple(atributo_simple & as, char *valorAtributo, int id, bool primerAtributo);
 #endif

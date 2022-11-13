@@ -39,5 +39,7 @@ bool verificaTipoDato(columnaSingular cs, char *dato, char *columna);
 
 void imprimircs(columnaSingular cs);
 
+int RandomString(int ch);
+
 
 #endif
