@@ -31,7 +31,7 @@ columnaSingular igualarCSaColumna(columnaSingular cs, char *dato);
 
 TipoRet InsertInto_ColumnasSingular(columnaSingular & cs, char *columnasTupla, char *valoresTupla, int lenghtColumnasTupla, int lenghtValoresTupla);
 
-TipoRet eliminarColumnaSing(columnaSingular & cs,char *NombreColumnaSingular);
+columnaSingular eliminarColumnaSing(columnaSingular & cs,char *NombreColumnaSingular);
 
 void eliminarC(columnaSingular & cs, char *NombreColumnaSingular);
 

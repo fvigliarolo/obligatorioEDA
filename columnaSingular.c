@@ -314,7 +314,7 @@ void eliminarC(columnaSingular & cs, char *NombreColumnaSingular){
 								cs = primerPosicion(cs);
 }
 
-TipoRet eliminarColumnaSing(columnaSingular & cs, char *NombreColumnaSingular){
+columnaSingular eliminarColumnaSing(columnaSingular & cs, char *NombreColumnaSingular){
 	bool auxi = true;
 	cs = primerPosicion(cs);
 	while(auxi){ 
@@ -329,12 +329,16 @@ TipoRet eliminarColumnaSing(columnaSingular & cs, char *NombreColumnaSingular){
 					elim 				= cs;
 					delete elim;
 					cs 					= cs->anterior;
+					
+					cs = primerPosicion(cs); //prueba
 			
-					return OK;
+					return cs;
 				}else{
 					auxi = false;
 					cout << "No se puede eliminar PRIMARY_KEY mientras existan otras columnas" << endl ;
-					return ERROR;
+					cs = primerPosicion(cs); //prueba
+					//VER COMO HACER QUE DEVUELVA ERROR 
+					return cs;
 				}
 			}else{
 				cs = cs->sig;
@@ -349,7 +353,9 @@ TipoRet eliminarColumnaSing(columnaSingular & cs, char *NombreColumnaSingular){
 					elim				= cs;
 					cs 					= cs->anterior;
 					delete elim;
-					return OK;
+					cs = primerPosicion(cs); //prueba
+
+					return cs;
 				}else{
 					cout << "Hay que eliminar la PRIMARY_KEY" << endl ;
 					cs->anterior 	= NULL;
@@ -358,12 +364,12 @@ TipoRet eliminarColumnaSing(columnaSingular & cs, char *NombreColumnaSingular){
 					delete elim;
 					cs 				= NULL;
 					cout << cs << endl ;
-					return OK;
+					return cs;
 				}
 			}else{
 				auxi = false;
 				cout << "No existe la columna de nombre: " << NombreColumnaSingular << endl ;
-				return ERROR;
+				return cs;
 			}
 		}
 	}

@@ -51,7 +51,7 @@ TipoRet EliminarTabla_tablas(tablas & ts, char * nombreTabla){
 	 else{
 		ts->t = eliminarTabla(ts->t, nombreTabla);
 		ts = crearTablas();
-
+		// cuando hagamos el arbol hay que cambiar la linea de arriba
 		return OK;
 	 }
 }

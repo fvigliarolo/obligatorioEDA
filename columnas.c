@@ -99,8 +99,12 @@ TipoRet EliminarColumnaSing_columnas(columnas & Colum, char *NombreColS){
 		cout << "No existe la columna " << NombreColS <<endl;
 		return ERROR;
 	}else{
-		return eliminarColumnaSing(Colum->columna_singular, NombreColS);
-	Colum->columna_singular = NULL;
+		Colum->columna_singular = eliminarColumnaSing(Colum->columna_singular, NombreColS);
+		if(Colum->columna_singular == NULL)
+			Colum = crearColumnasNULL();
+		
+		return OK;
+		
 	}
 
 }
