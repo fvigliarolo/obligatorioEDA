@@ -225,6 +225,14 @@ columnaSingular igualarCSaColumna(columnaSingular cs, char *columnaNombre){
 	}
 }
 
+bool ispk(columnaSingular & cs){
+	if(strcasecmp(cs->calificador, "PRIMARY_KEY") == 0){
+		return true;
+	}else{
+		return false;
+	}
+}
+
 TipoRet InsertInto_ColumnasSingular(columnaSingular & cs, char *columnasTupla, char *valoresTupla, int lenghtColumnasTupla, int lenghtValoresTupla){
 	int errores = 0;
 	
@@ -275,44 +283,19 @@ TipoRet InsertInto_ColumnasSingular(columnaSingular & cs, char *columnasTupla, c
 		errores += 1;
 	}
 
-	if (errores == 0){
-		int identificador = RandomString(8);
-		for (int l = 0; l<lenghtColumnasTupla; l++){
-			cs = igualarCSaColumna(cs, arrayColumnasTupla[l]);
-			if(cs->atr_simple == NULL){
-				cs->atr_simple = atributoSimpleNull();
-				if (InsertInto_AtributoSimple(cs->atr_simple, arrayValoresTupla[l], identificador, true) == ERROR){ errores +=1; }
-			}else{
-				if (InsertInto_AtributoSimple(cs->atr_simple, arrayValoresTupla[l], identificador, false) == ERROR){ errores += 1; }
-			}
-		}
-		
-
-		if(errores == 0){
-			return OK;
-		}else{
-			return ERROR;
-		}
-	}else{
-		return ERROR;
-	}
-
-
-
-
-
 	bool iterar = true;
 	int l = 0;
 
+	int identificador = RandomString(8);
 	while(iterar){
 		if (errores == 0){
 			if(l<lenghtColumnasTupla){
 				cs = igualarCSaColumna(cs, arrayColumnasTupla[l]);
 				if(cs->atr_simple == NULL){
 					cs->atr_simple = atributoSimpleNull();
-					if (InsertInto_AtributoSimple(cs->atr_simple, arrayValoresTupla[l], l, true) == ERROR){ errores +=1; }
+					if (InsertInto_AtributoSimple(cs->atr_simple, arrayValoresTupla[l], identificador, true, ispk(cs)) == ERROR){ errores +=1; }
 				}else{
-					if (InsertInto_AtributoSimple(cs->atr_simple, arrayValoresTupla[l], l, false) == ERROR){ errores += 1; }
+					if (InsertInto_AtributoSimple(cs->atr_simple, arrayValoresTupla[l], identificador, false, ispk(cs)) == ERROR){ errores += 1; }
 				}
 
 			 l += 1;
@@ -324,28 +307,23 @@ TipoRet InsertInto_ColumnasSingular(columnaSingular & cs, char *columnasTupla, c
 		}else{
 			// se eliminan todos los nodos creados y pertenecientes a la tupla.
 			iterar = false;
-			for (int k = 0; k<=l; k += 1){
-				cs = igualarCSaColumna(cs, arrayColumnasTupla[l]);
-				// eliminarAtributoSimple(cs, arrayValoresTupla[l]);
-				cout << "se tiene que eliminar de la columna: " <<   arrayColumnasTupla[l] << endl ;
-				cout << "El atributo: " <<   arrayValoresTupla[l] << endl ;
-			}
+			// for (int k = 0; k<=l; k += 1){
+			// 	cs = igualarCSaColumna(cs, arrayColumnasTupla[l]);
+			// 	// eliminarAtributoSimple(cs, arrayValoresTupla[l]);
+			// 	cout << "se tiene que eliminar de la columna: " <<   arrayColumnasTupla[l] << endl ;
+			// 	cout << "El atributo: " <<   arrayValoresTupla[l] << endl ;
+			// }
 			return ERROR;
 		}
 	}
-
-
-
-
 }
 
 void eliminarC(columnaSingular & cs, char *NombreColumnaSingular){
-	
-				columnaSingular elim = cs;//pa borrar
-				columnaSingular ant = cs->anterior; // apunta al nodo anterior
-								ant->sig = cs->sig;
-								delete elim;//elimino
-								cs = primerPosicion(cs);
+	columnaSingular elim = cs;//pa borrar
+	columnaSingular ant = cs->anterior; // apunta al nodo anterior
+	ant->sig = cs->sig;
+	delete elim;//elimino
+	cs = primerPosicion(cs);
 }
 
 columnaSingular eliminarColumnaSing(columnaSingular & cs, char *NombreColumnaSingular){
@@ -407,4 +385,19 @@ columnaSingular eliminarColumnaSing(columnaSingular & cs, char *NombreColumnaSin
 			}
 		}
 	}
+}
+
+TipoRet printdatatable_columna(columnaSingular cs, char *NombreTabla){
+	bool aux = true;
+	cout << "		" << "NOMBRE" << "		" << "CALIFICADOR" << endl ;
+	cout << "===================================================" << endl ;
+	while(aux){
+		if (cs != NULL){
+			imprimirAll(cs->atr_simple);
+			cs = cs->sig;
+		}else{
+			aux = false;
+		}
+	}
+	return OK;
 }

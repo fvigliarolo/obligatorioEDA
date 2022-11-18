@@ -14,5 +14,7 @@ void insertInto(atributo_simple & as, char *valorAtributo, int id, bool primerAt
 
 void imprimirAll(atributo_simple as);
 
-TipoRet InsertInto_AtributoSimple(atributo_simple & as, char *valorAtributo, int id, bool primerAtributo);
+TipoRet InsertInto_AtributoSimple(atributo_simple & as, char *valorAtributo, int id, bool primerAtributo, bool pk);
+
+bool pkduplicada(atributo_simple as, char *valorAtributo);
 #endif

@@ -41,5 +41,9 @@ void imprimircs(columnaSingular cs);
 
 int RandomString(int ch);
 
+bool ispk(columnaSingular & cs);
+
+TipoRet printdatatable_columna(columnaSingular cs, char *NombreTabla);
+
 
 #endif

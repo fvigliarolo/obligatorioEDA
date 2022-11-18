@@ -24,9 +24,9 @@ bool isColumnasEmpty_Columnas(columnas col){
 //addColumn
 TipoRet crearColumnaSingular_Columnas(columnas col, char *NombreCol, char *tipoCol, char *calificadorCol, bool primerCol){
 	if (col->columna_singular == NULL){
-		imprimircs(col->columna_singular);
+		// imprimircs(col->columna_singular);
 		col->columna_singular = columnaSingularNull();
-		imprimircs(col->columna_singular);
+		// imprimircs(col->columna_singular);
 		if (crearColumnaSingular_ColumnasSingular(col->columna_singular, NombreCol, tipoCol, calificadorCol, primerCol) == ERROR){
 			return ERROR;
 		}else{
@@ -106,5 +106,10 @@ TipoRet EliminarColumnaSing_columnas(columnas & Colum, char *NombreColS){
 		return OK;
 		
 	}
+}
 
+
+
+TipoRet printdatatable_columna(columnas col, char *NombreTabla){
+	return printdatatable_columna(col->columna_singular, NombreTabla);
 }

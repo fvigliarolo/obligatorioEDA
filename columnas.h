@@ -29,6 +29,8 @@ bool existeColumnaSingular(columnaSingular cs, char * NombreCol);
 
 TipoRet EliminarColumnaSing_columnas(columnas & Colum, char *NombreColS);
 
+TipoRet printdatatable_columna(columnas col, char *NombreTabla);
+
 
 
 #endif
