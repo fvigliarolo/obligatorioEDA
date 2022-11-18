@@ -388,16 +388,47 @@ columnaSingular eliminarColumnaSing(columnaSingular & cs, char *NombreColumnaSin
 }
 
 TipoRet printdatatable_columna(columnaSingular cs, char *NombreTabla){
-	bool aux = true;
-	cout << "		" << "NOMBRE" << "		" << "CALIFICADOR" << endl ;
+	// cout << "		" << "NOMBRE" << "		" << "CALIFICADOR" << endl ;
 	cout << "===================================================" << endl ;
-	while(aux){
-		if (cs != NULL){
-			imprimirAll(cs->atr_simple);
-			cs = cs->sig;
-		}else{
-			aux = false;
+	int lenght;
+	lenght = getLenght(cs->atr_simple);
+	if (lenght == 0){
+		cout << "No se han insertado datos" << endl ;
+	}else{
+		for (int i = 1; i<=lenght; i++){
+			cs = primerPosicion(cs);
+			bool aux = true;
+			while(aux){
+				if (cs->sig != NULL){
+					imprimirAtributo(cs->atr_simple, i);
+					cs = cs->sig;
+				}else{
+					imprimirAtributo(cs->atr_simple, i);
+					aux = false;
+				}
+			}
+			cout << "\n" ;
+
 		}
 	}
 	return OK;
 }
+
+
+
+
+
+
+
+	// bool aux = true;
+	// cout << "		" << "NOMBRE" << "		" << "CALIFICADOR" << endl ;
+	// cout << "===================================================" << endl ;
+	// while(aux){
+	// 	if (cs != NULL){
+	// 		imprimirAll(cs->atr_simple);
+	// 		cs = cs->sig;
+	// 	}else{
+	// 		aux = false;
+	// 	}
+	// }
+	// return OK;

@@ -17,8 +17,28 @@ atributo_simple atributoSimpleNull(){
 }
 
 void imprimirAtributo(atributo_simple & as, int id){
-		cout << as->valor << endl ;
-		cout << as->identificador << endl;
+	int contador;
+	contador = 1;
+	atributo_simple auxiliar = as;
+	bool aux = true;
+	while (aux){
+		if(contador == id){
+			getValor(auxiliar);
+			aux = false;
+		}else{
+			contador += 1;
+			auxiliar = auxiliar->sig;
+		}
+	}
+
+}
+
+void getValor(atributo_simple as){
+	if(strcasecmp(as->valor, "__EMPTY") == 0){
+		cout << as->valor_secundario << "		" ;
+	}else{
+		cout << as->valor << "		" ;
+	}
 }
 
 
@@ -59,20 +79,16 @@ bool pkduplicada(atributo_simple as, char *valorAtributo){
 	bool aux = true;
 	while(aux){
 		if(as != NULL){
-			cout << "linea 62 de as" << endl ;
 			if((as->valor == valorAtributo) && (strcasecmp(as->valor, "__EMPTY") != 0)){
-				cout << "linea 64 de as" << endl ;
 				return true;
 			}else{
 				if((atoi(valorAtributo) == as->valor_secundario) && as->valor_secundario != -2147483648){
-				cout << "linea 68 de as" << endl ;
 					return true;
 				}else{
 					as = as->sig;
 				}
 			}
 		}else{
-			cout << "linea 75 de as" << endl ;
 			aux = false;
 			return false;
 		}
@@ -122,6 +138,28 @@ TipoRet InsertInto_AtributoSimple(atributo_simple & as, char *valorAtributo, int
 		}
 	}
 }
+
+int getLenght(atributo_simple as){
+	if(as == NULL){
+		return 0;
+	}else{
+		atributo_simple auxiliar;
+		auxiliar = as;
+		int contador;
+		contador = 0;
+		bool aux = true;
+		while(aux){
+			if(auxiliar == NULL){
+				aux = false;
+				return contador;
+			}else{
+				contador += 1;
+				auxiliar = auxiliar->sig;
+			}
+		}
+	}
+}
+
 
 
 

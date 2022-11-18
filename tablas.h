@@ -40,5 +40,8 @@ TipoRet EliminarColumnaSing_tablas(tablas & ts, char *nombreTabla, char *nombreC
 
 // TipoRet eliminarTabla_Tablas(tablas & ts, char *nombreTabla);
 
+TipoRet printdatatable_tablas(tablas ts, char *NombreTabla);
+
+
 
 #endif

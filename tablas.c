@@ -94,3 +94,8 @@ TipoRet EliminarColumnaSing_tablas(tablas & ts, char *nombreTabla, char *nombreC
 	}
 }
 
+
+TipoRet printdatatable_tablas(tablas ts, char *NombreTabla){
+	return printdatatable_tabla(ts->t, NombreTabla);
+}
+

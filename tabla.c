@@ -102,5 +102,8 @@ tabla eliminarTabla(tabla & t, char * nombreTabla){
 	return t;
 }
 
+TipoRet printdatatable_tabla(tabla t, char *NombreTabla){
+	return printdatatable_columna(t->colums, NombreTabla);
+}
 
 

@@ -41,4 +41,6 @@ TipoRet InsertInto_Tabla(tabla & t, char *nombreTabla, char *columnasTupla, char
 // Intenta realizar una insercion de datos en la tabla indicada por el usuario.
 
 
+TipoRet printdatatable_tabla(tabla t, char *NombreTabla);
+
 #endif

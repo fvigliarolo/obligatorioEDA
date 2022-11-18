@@ -17,4 +17,9 @@ void imprimirAll(atributo_simple as);
 TipoRet InsertInto_AtributoSimple(atributo_simple & as, char *valorAtributo, int id, bool primerAtributo, bool pk);
 
 bool pkduplicada(atributo_simple as, char *valorAtributo);
+
+int getLenght(atributo_simple as);
+
+void getValor(atributo_simple as);
+
 #endif
