@@ -9,8 +9,7 @@ using namespace std;
 struct nodo_tabla{
 	char * nombre;
 	columnas colums;
-	tabla iz;
-	tabla der;
+	tabla sig;
 };
 
 tabla crearTabla(char * nombreTabla){
@@ -21,13 +20,109 @@ tabla crearTabla(char * nombreTabla){
 	return t;
 }
 
+
+bool existeTabla(tabla t, char *nombreTabla){
+	tabla auxiliar = t;
+	bool aux = true;
+	while(aux){
+		if(auxiliar != NULL){
+			if(strcasecmp(auxiliar->nombre, nombreTabla) == 0){
+				aux = false;
+				return true;
+			}else{
+				auxiliar = auxiliar->sig;
+			}
+		}else{
+			aux = false;
+			return false;
+		}
+	}
+}
+
+
+tabla igualarTabla(tabla & t, char *nombreTabla){
+	bool aux = true;
+	tabla auxiliar = t;
+	if(existeTabla(t, nombreTabla)){
+		while(aux){
+			if(strcasecmp(auxiliar->nombre, nombreTabla) == 0){
+				aux = false;
+				return auxiliar;
+			}else{
+				auxiliar = auxiliar->sig;
+			}
+		}
+	}else{
+		return t;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TipoRet crearTabla2(tabla & t, char * nombreTabla){
+
+		if(existeTabla(t, nombreTabla)){
+				cout << "Ya existe la tabla con el nombre " << nombreTabla << endl;
+				return ERROR;
+		}else{
+			// if(strcasecmp(auxiliar->nombre, nombreTabla) == 0){
+			// 	cout << "Ya existe la tabla con el nombre " << nombreTabla << endl;
+			// 	return ERROR;
+			// }else{
+			tabla auxiliar = t;
+			bool aux = true;
+			while(aux){
+				if(auxiliar->sig != NULL){
+					auxiliar = auxiliar->sig;
+				}else{
+					aux  = false;
+					tabla nueva 		= new(nodo_tabla);
+					auxiliar->sig 		= nueva;			
+					nueva->nombre 		= new char[MAX_NOMBRE];
+					strcpy(nueva->nombre, nombreTabla);
+					nueva->colums		 = crearColumnasNULL();
+				}
+		}
+		return OK;
+	}
+}
+
+
 tabla crearColumnas_Tabla(tabla & t){
 	t->colums = crearColumnas(); 
 	return t;
 }
 
-char * nombreTabla(tabla t){
-	return t->nombre;
+void nombreTabla(tabla t){
+	tabla auxiliar = t;
+	while(auxiliar != NULL){
+		cout << auxiliar->nombre << endl ;
+		auxiliar = auxiliar->sig;
+	}
 }
 
 columnas getColumnas(tabla t){
@@ -44,18 +139,23 @@ bool compararNombreTabla(tabla t, char * nombreTabla){
 
 //addColumn
  TipoRet crearColumnaSingular_Tabla(tabla t, char *nombreTabla, char *NombreCol, char *tipoCol, char *calificadorCol){
-	if (strcasecmp (nombreTabla, t->nombre) != 0){
+	if(!existeTabla(t, nombreTabla)){
 		cout << "No existe la tabla " << nombreTabla << "\n";
 		return ERROR;
 	}else{
+		// if (strcasecmp (nombreTabla, t->nombre) != 0){
+		tabla auxiliar = t;
+		auxiliar = igualarTabla(auxiliar, nombreTabla);
+	// }
+	// }else{
 		bool primerCol;
-		if(isColumnasEmpty_Columnas(t->colums)){
+		if(isColumnasEmpty_Columnas(auxiliar->colums)){
 			primerCol = true;
-			t->colums = crearColumnas(); // Creamos un new(nodo_columnas)
-			return crearColumnaSingular_Columnas(t->colums, NombreCol, tipoCol, calificadorCol, primerCol);
+			auxiliar->colums = crearColumnas(); // Creamos un new(nodo_columnas)
+			return crearColumnaSingular_Columnas(auxiliar->colums, NombreCol, tipoCol, calificadorCol, primerCol);
 		}else{
 			primerCol = false;
-			return crearColumnaSingular_Columnas(t->colums, NombreCol, tipoCol, calificadorCol, primerCol);
+			return crearColumnaSingular_Columnas(auxiliar->colums, NombreCol, tipoCol, calificadorCol, primerCol);
 		}		
 	}
  }
@@ -71,8 +171,10 @@ bool compararNombreTabla(tabla t, char * nombreTabla){
 
 // PrintMetaData()
 TipoRet estructuraTablas_tabla(tabla & t, char *nombreTabla){
-	if (strcasecmp (nombreTabla, t->nombre) == 0){
-		return estructuraTablas_Columnas(t->colums, nombreTabla);
+	if(existeTabla(t, nombreTabla)){
+		tabla auxiliar = t;
+		auxiliar = igualarTabla(auxiliar, nombreTabla);
+		return estructuraTablas_Columnas(auxiliar->colums, nombreTabla);
 	}else{
 		cout << "La tabla no existe" << endl ;
 		return ERROR;

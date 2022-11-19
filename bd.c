@@ -14,6 +14,8 @@
 #include "columnaSingular.h"
 #include "atributo_simple.h"
 #include <stdbool.h> // para bool
+#include <stdio.h>
+#include <stdlib.h>
 
 
 using namespace std;
@@ -30,6 +32,22 @@ bd createBD(){
 
 TipoRet createTable (bd & bd, char *nombreTabla){
 	//cout << " - createTable " << nombreTabla << endl
+    // char str[100] = "alguito";/* Declares a string of size 100 */
+    // int l= 0;
+	// // char algo = "alguito"
+	
+    //    printf("\n\nSeparate the individual characters from a string :\n");
+    //    printf("------------------------------------------------------\n"); 	
+    //    printf("Input the string : ");
+    // //    fgets(str, sizeof str, algo);
+	//    printf("The characters of the string are : \n");
+    // while(str[l]!='\0')
+    // {
+    //    printf("%c  ", str[l]);
+    //    l++;
+    // }
+    // printf("\n");
+ 
 	return crearTabla_Tablas(bd->ts, nombreTabla);
 }
 

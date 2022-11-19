@@ -18,11 +18,11 @@ bool isTablasEmpty_Tablas(tablas & ts){
 	return (ts == NULL);
 }
 
-char * imprimirTablas(tablas ts){
+void imprimirTablas(tablas ts){
 	if (ts == NULL){
 		cout << " - No hay tablas\n";
 	}else{
-		return nombreTabla(ts->t);
+		nombreTabla(ts->t);
 	}
 }
 
@@ -38,8 +38,8 @@ TipoRet crearTabla_Tablas(tablas & ts, char * nombreTabla){
 		ts->t = crearTabla(nombreTabla);
 		return OK;
 	}else{
-		cout << "Imposible Crear Tabla, ya hay una creada y el sistema soporta solo una\n";
-		return ERROR;
+		// cout << "Imposible Crear Tabla, ya hay una creada y el sistema soporta solo una\n";
+		return crearTabla2(ts->t, nombreTabla);
 	}
 }
 

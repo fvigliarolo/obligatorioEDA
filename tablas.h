@@ -9,7 +9,7 @@ typedef struct nodo_tablas * tablas;
 bool isTablasEmpty_Tablas(tablas & ts);
 // Devuelve true si ts es NULL.
 
-char * imprimirTablas(tablas ts);
+void imprimirTablas(tablas ts);
 
 tablas crearTablas();
 // Crea el conjunto de tablas vacio.

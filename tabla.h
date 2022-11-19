@@ -9,6 +9,13 @@ typedef struct nodo_tabla * tabla;
 tabla crearTabla(char * nombreTabla);
 // Crea una tabla de nombre "nombreTabla".
 
+bool existeTabla(tabla t, char *nombreTabla);
+
+TipoRet crearTabla2(tabla & t, char * nombreTabla);
+
+tabla igualarTabla(tabla & t, char *nombreTabla);
+
+
 tabla eliminarTabla(tabla & t, char * nombreTabla);
 //elimina la tabla y sus tuplas
 //pre: la tabla a eliminar existe
@@ -18,7 +25,7 @@ tabla eliminarTabla(tabla & t, char * nombreTabla);
 
 tabla crearColumnas_Tabla(tabla & t);
 
-char * nombreTabla(tabla t);
+void nombreTabla(tabla t);
 // Retorna el nombre de t.
 // Pre: t creada previamente.
 
