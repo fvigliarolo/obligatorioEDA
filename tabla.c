@@ -57,32 +57,6 @@ tabla igualarTabla(tabla & t, char *nombreTabla){
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 TipoRet crearTabla2(tabla & t, char * nombreTabla){
 
 		if(existeTabla(t, nombreTabla)){
@@ -189,19 +163,51 @@ TipoRet InsertInto_Tabla(tabla & t, char *nombreTabla, char *columnasTupla, char
 
 }
 tabla eliminarTabla(tabla & t, char * nombreTabla){
-	int aux = strcasecmp(t->nombre,nombreTabla);
-		if(aux == 0){
-			tabla elim = t;
-			t = NULL;
+	//int aux = strcasecmp(t->nombre,nombreTabla);
+	// 	if(aux == 0){
+	// 		tabla elim = t;
 			
-			delete elim;
+	// 		delete elim;
 			
+	// 	}
+	// 	else{
+	// 		cout << "la tabla " << t << " no fue borrada" << endl;
+	// 		return t;
+	// 	}
+	// return t;
+	//lo de arriba funciona para una unica tabla
+	tabla iter = t;
+	tabla ant = NULL;
+	while (iter!=NULL)
+	{
+		if ((strcasecmp(iter->nombre,nombreTabla)) == 0)
+		{
+			if (ant == NULL)
+			{
+				t=t->sig;
+				delete iter;
+				iter = t;
+				return t;
+			}else{
+				ant->sig = iter->sig;
+				delete iter;
+				iter = ant->sig;
+				return t;
+			}
+			
+			
+		}else{
+			ant = iter;
+			iter = iter->sig;
 		}
-		else{
-			cout << "la tabla " << t << " no fue borrada" << endl;
-			return t;
-		}
+		
+		
+		
+	}
 	return t;
+	
+	
+	
 }
 
 TipoRet printdatatable_tabla(tabla t, char *NombreTabla){

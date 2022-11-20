@@ -1,7 +1,10 @@
 createTable(Personas)
-dropTable(Personas)
 createTable(Escuelas)
 createTable(zonas)
+dropTable(Personas)
+dropTable(Escuelas)
+dropTable(zonas)
+
 addCol(Personas, CI, integer, PRIMARY_KEY)
 addCol(Escuelas, CI, integer, PRIMARY_KEY)
 addCol(Personas, HP, integer, PRIMARY_KEY)
